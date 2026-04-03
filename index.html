@@ -16,27 +16,39 @@ body {
 /* HEADER */
 header {
     background: #020617;
-    padding: 25px;
+    padding: 35px 20px;
     text-align: center;
 }
 
 header h1 {
     color: #38bdf8;
+    font-size: 40px;
     margin: 0;
 }
 
-/* SUB HEADER */
 .sub {
-    color: #cbd5f5;
-    font-size: 14px;
+    color: white;
+    font-size: 20px;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+/* HERO MESSAGE */
+.home-msg {
+    text-align: center;
+    padding: 14px;
+    background: #1e293b;
+    color: #facc15;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 /* INFO BAR */
 .info-bar {
     text-align: center;
-    background: #1e293b;
+    background: #020617;
     color: white;
-    padding: 10px;
+    padding: 12px;
     font-size: 14px;
 }
 
@@ -44,17 +56,16 @@ header h1 {
 .hero {
     text-align: center;
     padding: 25px;
-    background: #020617;
 }
 
 .hero h2 {
     color: white;
+    margin-bottom: 10px;
 }
 
 .hero a {
     display: inline-block;
-    margin-top: 10px;
-    padding: 12px 20px;
+    padding: 12px 22px;
     background: #38bdf8;
     color: black;
     border-radius: 6px;
@@ -69,11 +80,11 @@ header h1 {
     padding: 20px;
 }
 
-/* MENU TITLE */
-.menu-title {
+/* SECTION */
+.section-title {
     color: white;
-    font-size: 22px;
-    margin-bottom: 10px;
+    font-size: 26px;
+    margin: 25px 0 10px;
 }
 
 /* CARD */
@@ -84,12 +95,12 @@ header h1 {
     margin-bottom: 15px;
 }
 
-/* CARD HEADER */
+/* TOP */
 .card-top {
     display: flex;
     justify-content: space-between;
+    font-size: 22px;
     font-weight: bold;
-    font-size: 20px; /* BIGGER */
 }
 
 /* BADGE */
@@ -116,8 +127,8 @@ header h1 {
 }
 
 .qty button {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     background: #1e40af;
     color: white;
     border: none;
@@ -132,7 +143,7 @@ header h1 {
 /* BUTTON */
 .btn {
     width: 100%;
-    padding: 15px;
+    padding: 16px;
     background: #1e40af;
     color: white;
     border: none;
@@ -178,6 +189,10 @@ input, select {
 <div class="sub">Powered by Trina’s Cloud Kitchen</div>
 </header>
 
+<div class="home-msg">
+🍛 Not restaurant food — real homemade Indian & Bangladeshi cooking, prepared fresh with traditional recipes
+</div>
+
 <div class="info-bar">
 🚚 Delivery Only • ⏱ 3 Hour Notice Required • 🕘 Open 9AM – 9PM
 </div>
@@ -189,9 +204,9 @@ input, select {
 
 <div class="container">
 
-<div class="menu-title">Menu</div>
+<div class="section-title">Main Menu</div>
 
-<!-- BIRYANI -->
+<!-- ITEMS -->
 <div class="card">
 <div class="card-top">
 <span>Chicken Biryani <span class="badge">Popular</span></span>
@@ -205,7 +220,6 @@ input, select {
 </div>
 </div>
 
-<!-- LAMB -->
 <div class="card">
 <div class="card-top">
 <span>Lamb Akhni <span class="badge">Popular</span></span>
@@ -259,18 +273,48 @@ input, select {
 </div>
 </div>
 
+<!-- DESSERT -->
+<div class="section-title">Desserts</div>
+
+<div class="card">
+<div class="card-top"><span>Gulab Jamun</span><span>£10</span></div>
+<div class="desc">Soft syrup-soaked milk dumplings.</div>
+<div class="qty">
+<button onclick="changeQty('gulab',-1)">-</button>
+<span id="gulab">0</span>
+<button onclick="changeQty('gulab',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Rasmalai</span><span>£10</span></div>
+<div class="desc">Creamy milk dessert.</div>
+<div class="qty">
+<button onclick="changeQty('rasmalai',-1)">-</button>
+<span id="rasmalai">0</span>
+<button onclick="changeQty('rasmalai',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Birthday Cake</span><span>£25</span></div>
+<div class="desc">Fresh celebration cake for birthdays.</div>
+<div class="qty">
+<button onclick="changeQty('cake',-1)">-</button>
+<span id="cake">0</span>
+<button onclick="changeQty('cake',1)">+</button>
+</div>
+</div>
+
 <button class="btn" onclick="showSummary()">Confirm Order</button>
 
-<!-- SUMMARY -->
 <div class="box" id="summaryBox">
 <h3>Order Summary</h3>
 <p id="summaryText"></p>
 <button class="btn" onclick="showForm()">Continue</button>
 </div>
 
-<!-- FORM -->
 <div class="box" id="formBox">
-
 <h3>Delivery Details</h3>
 
 <input id="name" placeholder="Name">
@@ -278,12 +322,12 @@ input, select {
 <input id="address" placeholder="Address">
 
 <label>Distance (miles)</label>
-<input id="miles" placeholder="Enter miles">
+<input id="miles">
 
-<label>Select Date</label>
+<label>Date</label>
 <input type="date" id="date">
 
-<label>Select Time</label>
+<label>Time</label>
 <select id="time">
 <option>12:00</option>
 <option>14:00</option>
@@ -293,7 +337,6 @@ input, select {
 </select>
 
 <button class="btn" onclick="checkout()">Place Order</button>
-
 </div>
 
 </div>
@@ -304,32 +347,24 @@ Total: £<span id="total">0</span>
 
 <script>
 
-// SAME JS (unchanged)
-
 let prices = {
-biryani:14,
-akhni:15,
-chickenCurry:15,
-beef:15,
-dal:7,
-aloo:8
+biryani:14, akhni:15, chickenCurry:15, beef:15,
+dal:7, aloo:8, gulab:10, rasmalai:10, cake:25
 };
 
 let itemNames = {
-biryani:"Chicken Biryani",
-akhni:"Lamb Akhni",
-chickenCurry:"Chicken Curry",
-beef:"Beef Curry",
-dal:"Dal",
-aloo:"Aloo Bhaji"
+biryani:"Chicken Biryani", akhni:"Lamb Akhni",
+chickenCurry:"Chicken Curry", beef:"Beef Curry",
+dal:"Dal", aloo:"Aloo Bhaji",
+gulab:"Gulab Jamun", rasmalai:"Rasmalai",
+cake:"Birthday Cake"
 };
 
 function changeQty(id, change){
-let el = document.getElementById(id);
-let val = parseInt(el.innerText);
-val += change;
+let el=document.getElementById(id);
+let val=parseInt(el.innerText)+change;
 if(val<0) val=0;
-el.innerText = val;
+el.innerText=val;
 updateTotal();
 }
 
@@ -344,20 +379,13 @@ document.getElementById("total").innerText=total;
 
 function showSummary(){
 let total=parseInt(document.getElementById("total").innerText);
-
-if(total<40){
-alert("Minimum order £40");
-return;
-}
+if(total<40){ alert("Minimum £40"); return; }
 
 let text="";
 for(let i in itemNames){
 let qty=document.getElementById(i).innerText;
-if(qty>0){
-text+=itemNames[i]+" x"+qty+"<br>";
+if(qty>0){ text+=itemNames[i]+" x"+qty+"<br>"; }
 }
-}
-
 document.getElementById("summaryText").innerHTML=text;
 document.getElementById("summaryBox").style.display="block";
 }
@@ -367,30 +395,21 @@ document.getElementById("formBox").style.display="block";
 }
 
 function checkout(){
-
 let total=parseFloat(document.getElementById("total").innerText);
-let miles=parseFloat(document.getElementById("miles").value || 0);
-let delivery = miles * 1.5;
+let miles=parseFloat(document.getElementById("miles").value||0);
+let delivery=miles*1.5;
+let finalTotal=total+delivery;
 
-let finalTotal = total + delivery;
+let date=document.getElementById("date").value;
+let time=document.getElementById("time").value;
 
-let selectedTime = document.getElementById("time").value;
-let selectedDate = document.getElementById("date").value;
+let now=new Date();
+let orderTime=new Date(date+"T"+time);
+let diff=(orderTime-now)/(1000*60*60);
 
-let now = new Date();
-let orderTime = new Date(selectedDate + "T" + selectedTime);
+if(diff<3){ alert("Minimum 3 hours notice required"); return; }
 
-let diff = (orderTime - now) / (1000 * 60 * 60);
-
-if(diff < 3){
-alert("Minimum 3 hours notice required");
-return;
-}
-
-let msg =
-"🍛 Home Spice Catering Order\n\n" +
-"Total: £"+finalTotal.toFixed(2)+"\n" +
-"Date: "+selectedDate+"\nTime: "+selectedTime;
+let msg="🍛 Order\nTotal: £"+finalTotal.toFixed(2)+"\nDate:"+date+" "+time;
 
 window.open("https://wa.me/44XXXXXXXXXX?text="+encodeURIComponent(msg));
 }

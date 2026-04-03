@@ -9,70 +9,50 @@
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(to bottom, #eef7fb, #fdfefe);
+    font-family: 'Segoe UI', Arial;
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+    color: #111;
 }
 
 /* HEADER */
 header {
-    background: white;
+    background: #020617;
     padding: 25px;
     text-align: center;
-    border-bottom: 1px solid #eee;
 }
 
 header h1 {
-    margin: 0;
-    color: #2a9fd6;
-    font-size: 32px;
+    color: #38bdf8;
 }
 
 /* INTRO */
 .intro {
     text-align: center;
     padding: 15px;
-    font-size: 15px;
-    background: #f4fbff;
+    background: #0f172a;
+    color: white;
 }
 
 /* HERO */
 .hero {
     text-align: center;
-    padding: 30px 20px;
-}
-
-.hero h2 {
-    margin-bottom: 10px;
+    padding: 25px;
+    background: #020617;
 }
 
 .hero a {
     display: inline-block;
-    padding: 12px 22px;
-    background: #2a9fd6;
-    color: white;
+    margin-top: 10px;
+    padding: 12px 20px;
+    background: #38bdf8;
+    color: black;
     border-radius: 6px;
     text-decoration: none;
-}
-
-/* INFO BAR */
-.banner {
-    text-align: center;
-    padding: 12px;
-    font-size: 14px;
-    background: #ffffff;
-}
-
-.urgency {
-    background: #2a9fd6;
-    color: white;
-    text-align: center;
-    padding: 10px;
     font-weight: bold;
 }
 
-/* FULL WIDTH CONTAINER */
+/* CONTAINER */
 .container {
-    width: 100%;
     max-width: 900px;
     margin: auto;
     padding: 20px;
@@ -84,8 +64,6 @@ header h1 {
     padding: 18px;
     border-radius: 12px;
     margin-bottom: 15px;
-    border: 1px solid #e8e8e8;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
 }
 
 /* CARD HEADER */
@@ -93,13 +71,22 @@ header h1 {
     display: flex;
     justify-content: space-between;
     font-weight: bold;
-    font-size: 16px;
 }
 
-/* DESCRIPTION */
+/* BADGE */
+.badge {
+    background: #f59e0b;
+    color: white;
+    padding: 3px 8px;
+    font-size: 11px;
+    border-radius: 6px;
+    margin-left: 6px;
+}
+
+/* DESC */
 .desc {
     font-size: 13px;
-    color: #666;
+    color: #555;
     margin: 6px 0 10px;
 }
 
@@ -112,11 +99,9 @@ header h1 {
 .qty button {
     width: 30px;
     height: 30px;
-    background: #2a9fd6;
+    background: #1e40af;
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
 }
 
 .qty span {
@@ -127,12 +112,11 @@ header h1 {
 .btn {
     width: 100%;
     padding: 14px;
-    background: #2a9fd6;
+    background: #1e40af;
     color: white;
     border: none;
     border-radius: 6px;
     margin-top: 10px;
-    font-size: 15px;
 }
 
 /* BOX */
@@ -140,8 +124,8 @@ header h1 {
     display: none;
     background: white;
     padding: 20px;
-    border-radius: 12px;
     margin-top: 20px;
+    border-radius: 10px;
 }
 
 /* INPUT */
@@ -160,7 +144,6 @@ input, select {
     padding: 12px;
     text-align: center;
     border-top: 1px solid #ddd;
-    font-size: 16px;
 }
 
 </style>
@@ -173,34 +156,25 @@ input, select {
 </header>
 
 <div class="intro">
-🍛 <strong>Delivery Only</strong> • Authentic homemade Bangladeshi & Indian food cooked fresh daily with traditional spices and care.
+🚚 Delivery Only • Fresh homemade Bangladeshi & Indian food
 </div>
 
 <div class="hero">
-<h2>Fresh Home-Cooked Meals Delivered To Your Door</h2>
-</div>
-
-<div class="banner">
-Minimum £40 • £1.5/mile • PL24/25/26 • 3hr notice • 9AM–9PM
-</div>
-
-<div class="urgency">
-⚠️ Limited delivery slots available daily
+<h2 style="color:white;">Fresh Home-Cooked Meals Delivered</h2>
+<a href="event-catering.html">Book Event Catering</a>
 </div>
 
 <div class="container">
 
-<h3>Today's Menu</h3>
+<h3 style="color:white;">Menu</h3>
 
-<!-- ITEM -->
+<!-- BIRYANI -->
 <div class="card">
 <div class="card-top">
-<span>Chicken Biryani</span>
+<span>Chicken Biryani <span class="badge">Popular</span></span>
 <span>£14</span>
 </div>
-<div class="desc">
-Fragrant basmati rice layered with tender spiced chicken, slow-cooked with traditional herbs.
-</div>
+<div class="desc">Fragrant basmati rice with tender spiced chicken.</div>
 <div class="qty">
 <button onclick="changeQty('biryani',-1)">-</button>
 <span id="biryani">0</span>
@@ -208,14 +182,13 @@ Fragrant basmati rice layered with tender spiced chicken, slow-cooked with tradi
 </div>
 </div>
 
+<!-- LAMB -->
 <div class="card">
 <div class="card-top">
-<span>Lamb Akhni</span>
+<span>Lamb Akhni <span class="badge">Popular</span></span>
 <span>£15</span>
 </div>
-<div class="desc">
-Rich and aromatic rice dish cooked with succulent lamb and mild spices for deep flavour.
-</div>
+<div class="desc">Aromatic rice dish with slow-cooked lamb.</div>
 <div class="qty">
 <button onclick="changeQty('akhni',-1)">-</button>
 <span id="akhni">0</span>
@@ -224,13 +197,8 @@ Rich and aromatic rice dish cooked with succulent lamb and mild spices for deep 
 </div>
 
 <div class="card">
-<div class="card-top">
-<span>Chicken Curry</span>
-<span>£15</span>
-</div>
-<div class="desc">
-Home-style curry made with tender chicken in a rich, comforting spiced gravy.
-</div>
+<div class="card-top"><span>Chicken Curry</span><span>£15</span></div>
+<div class="desc">Classic home-style chicken curry.</div>
 <div class="qty">
 <button onclick="changeQty('chickenCurry',-1)">-</button>
 <span id="chickenCurry">0</span>
@@ -239,13 +207,8 @@ Home-style curry made with tender chicken in a rich, comforting spiced gravy.
 </div>
 
 <div class="card">
-<div class="card-top">
-<span>Beef Curry</span>
-<span>£15</span>
-</div>
-<div class="desc">
-Slow-cooked beef in a bold, deeply spiced curry sauce full of traditional flavour.
-</div>
+<div class="card-top"><span>Beef Curry</span><span>£15</span></div>
+<div class="desc">Rich and hearty beef curry.</div>
 <div class="qty">
 <button onclick="changeQty('beef',-1)">-</button>
 <span id="beef">0</span>
@@ -254,13 +217,8 @@ Slow-cooked beef in a bold, deeply spiced curry sauce full of traditional flavou
 </div>
 
 <div class="card">
-<div class="card-top">
-<span>Dal</span>
-<span>£7</span>
-</div>
-<div class="desc">
-Comforting lentil curry, lightly spiced and perfect as a side or vegetarian option.
-</div>
+<div class="card-top"><span>Dal</span><span>£7</span></div>
+<div class="desc">Comforting lentil curry.</div>
 <div class="qty">
 <button onclick="changeQty('dal',-1)">-</button>
 <span id="dal">0</span>
@@ -269,47 +227,12 @@ Comforting lentil curry, lightly spiced and perfect as a side or vegetarian opti
 </div>
 
 <div class="card">
-<div class="card-top">
-<span>Aloo Bhaji</span>
-<span>£8</span>
-</div>
-<div class="desc">
-Spiced potatoes sautéed with onions and herbs — simple, homely and full of flavour.
-</div>
+<div class="card-top"><span>Aloo Bhaji</span><span>£8</span></div>
+<div class="desc">Spiced potatoes with herbs.</div>
 <div class="qty">
 <button onclick="changeQty('aloo',-1)">-</button>
 <span id="aloo">0</span>
 <button onclick="changeQty('aloo',1)">+</button>
-</div>
-</div>
-
-<div class="card">
-<div class="card-top">
-<span>Gulab Jamun</span>
-<span>£10</span>
-</div>
-<div class="desc">
-Soft milk dumplings soaked in warm sweet syrup — a classic indulgent dessert.
-</div>
-<div class="qty">
-<button onclick="changeQty('gulab',-1)">-</button>
-<span id="gulab">0</span>
-<button onclick="changeQty('gulab',1)">+</button>
-</div>
-</div>
-
-<div class="card">
-<div class="card-top">
-<span>Rasmalai</span>
-<span>£10</span>
-</div>
-<div class="desc">
-Delicate cheese dumplings served in sweet creamy milk with a hint of cardamom.
-</div>
-<div class="qty">
-<button onclick="changeQty('rasmalai',-1)">-</button>
-<span id="rasmalai">0</span>
-<button onclick="changeQty('rasmalai',1)">+</button>
 </div>
 </div>
 
@@ -324,19 +247,30 @@ Delicate cheese dumplings served in sweet creamy milk with a hint of cardamom.
 
 <!-- FORM -->
 <div class="box" id="formBox">
+
 <h3>Delivery Details</h3>
 
 <input id="name" placeholder="Name">
 <input id="phone" placeholder="Phone">
-<input id="address" placeholder="Delivery Address">
+<input id="address" placeholder="Address">
 
+<label>Distance (miles)</label>
+<input id="miles" placeholder="Enter miles">
+
+<label>Select Date</label>
+<input type="date" id="date">
+
+<label>Select Time</label>
 <select id="time">
-<option>2 Hours</option>
-<option>3 Hours</option>
-<option>4 Hours</option>
+<option>12:00</option>
+<option>14:00</option>
+<option>16:00</option>
+<option>18:00</option>
+<option>20:00</option>
 </select>
 
-<button class="btn" onclick="checkout()">Place Order via WhatsApp</button>
+<button class="btn" onclick="checkout()">Place Order</button>
+
 </div>
 
 </div>
@@ -353,9 +287,7 @@ akhni:15,
 chickenCurry:15,
 beef:15,
 dal:7,
-aloo:8,
-gulab:10,
-rasmalai:10
+aloo:8
 };
 
 let itemNames = {
@@ -364,9 +296,7 @@ akhni:"Lamb Akhni",
 chickenCurry:"Chicken Curry",
 beef:"Beef Curry",
 dal:"Dal",
-aloo:"Aloo Bhaji",
-gulab:"Gulab Jamun",
-rasmalai:"Rasmalai"
+aloo:"Aloo Bhaji"
 };
 
 function changeQty(id, change){
@@ -403,8 +333,6 @@ text+=itemNames[i]+" x"+qty+"<br>";
 }
 }
 
-text+="<br><strong>Total: £"+total+"</strong>";
-
 document.getElementById("summaryText").innerHTML=text;
 document.getElementById("summaryBox").style.display="block";
 }
@@ -415,30 +343,32 @@ document.getElementById("formBox").style.display="block";
 
 function checkout(){
 
-let total=document.getElementById("total").innerText;
+let total=parseFloat(document.getElementById("total").innerText);
+let miles=parseFloat(document.getElementById("miles").value || 0);
+let delivery = miles * 1.5;
 
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-let address=document.getElementById("address").value;
-let time=document.getElementById("time").value;
+let finalTotal = total + delivery;
 
-let orderText="";
+// 3 HOUR RULE
+let selectedTime = document.getElementById("time").value;
+let selectedDate = document.getElementById("date").value;
 
-for(let i in itemNames){
-let qty=document.getElementById(i).innerText;
-if(qty>0){
-orderText+=itemNames[i]+" x"+qty+"\\n";
+let now = new Date();
+let orderTime = new Date(selectedDate + "T" + selectedTime);
+
+let diff = (orderTime - now) / (1000 * 60 * 60);
+
+if(diff < 3){
+alert("Minimum 3 hours notice required");
+return;
 }
-}
 
-let msg=
-"🍛 Order - Home Spice Catering\\n\\n"+
-orderText+
-"\\nTotal: £"+total+
-"\\n\\nName: "+name+
-"\\nPhone: "+phone+
-"\\nAddress: "+address+
-"\\nTime: "+time;
+let msg =
+"🍛 Home Spice Catering Order\n\n" +
+"Food Total: £"+total+"\n" +
+"Delivery: £"+delivery.toFixed(2)+"\n" +
+"Total: £"+finalTotal.toFixed(2)+"\n\n" +
+"Date: "+selectedDate+"\nTime: "+selectedTime;
 
 window.open("https://wa.me/44XXXXXXXXXX?text="+encodeURIComponent(msg));
 }

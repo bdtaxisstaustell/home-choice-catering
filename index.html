@@ -17,10 +17,15 @@ body {
 /* HEADER */
 header {
     background: #020617;
-    padding: 25px;
+    padding: 20px;
     text-align: center;
     color: #38bdf8;
-    font-size: 34px;
+    font-size: 32px;
+}
+
+.sub {
+    color: #cbd5f5;
+    font-size: 14px;
 }
 
 /* TOP BAR */
@@ -28,24 +33,23 @@ header {
     text-align: center;
     background: #020617;
     color: white;
-    padding: 12px;
-    font-size: 18px;
+    padding: 10px;
     font-weight: bold;
 }
 
 /* HERO */
 .hero {
     text-align: center;
-    padding: 15px;
+    padding: 10px;
 }
 
 .hero a {
-    margin: 6px;
-    padding: 12px 18px;
+    padding: 10px 15px;
+    margin: 5px;
     display: inline-block;
     border-radius: 6px;
-    font-weight: bold;
     text-decoration: none;
+    font-weight: bold;
 }
 
 .btn-blue { background: #38bdf8; color: black; }
@@ -55,37 +59,41 @@ header {
 .container {
     max-width: 900px;
     margin: auto;
-    padding: 20px;
+    padding: 15px;
 }
 
 /* CATEGORY */
-.category-title {
-    font-size: 26px;
+.category {
+    font-size: 24px;
     font-weight: bold;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 /* CARD */
 .card {
     background: white;
-    padding: 15px;
+    padding: 12px;
     border-radius: 10px;
-    margin-bottom: 12px;
+    margin: 10px 0;
 }
 
 .card-top {
     display: flex;
     justify-content: space-between;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
-.card-desc {
-    font-size: 15px;
+.desc {
+    font-size: 14px;
     margin-top: 5px;
 }
 
 /* QTY */
+.qty {
+    margin-top: 8px;
+}
+
 .qty button {
     width: 30px;
     height: 30px;
@@ -96,41 +104,37 @@ header {
 
 .qty span {
     margin: 0 10px;
-    font-size: 18px;
 }
 
-/* BUTTON */
-.btn {
-    width: 100%;
+/* CART */
+.cart {
+    background: white;
     padding: 15px;
-    margin-top: 15px;
-    background: #1e40af;
-    color: white;
-    border: none;
-    font-size: 16px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.total {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 /* INPUT */
 input {
     width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+}
+
+/* BUTTON */
+.btn {
+    width: 100%;
     padding: 12px;
-    margin-top: 10px;
-}
-
-/* SUMMARY */
-.summary {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 15px;
-}
-
-/* FOOTER */
-.footer {
-    background: #020617;
+    background: #1e40af;
     color: white;
-    padding: 20px;
-    font-size: 14px;
+    border: none;
+    margin-top: 10px;
 }
 
 </style>
@@ -138,7 +142,10 @@ input {
 
 <body>
 
-<header>Home Spice Catering</header>
+<header>
+Home Spice Catering
+<div class="sub">Powered by Trina’s Cloud Kitchen</div>
+</header>
 
 <div class="top-bar">
 ⏱ 3PM – 8PM • Sunday & Monday CLOSED • Delivery Only
@@ -146,204 +153,152 @@ input {
 
 <div class="hero">
 <a href="https://wa.me/441726806556?text=Event%20Catering%20Enquiry" class="btn-blue">Book Event Catering</a>
+<a href="#" onclick="openStory()" class="btn-yellow">Our Story</a>
 </div>
 
 <div class="container">
 
-<h2 style="font-size:28px;">Menu</h2>
 <div id="menu"></div>
 
-<button class="btn" onclick="showForm()">Continue Order</button>
+<div class="cart">
+<h3>Your Cart</h3>
+<div id="cartItems"></div>
+<div class="total">Total: £<span id="total">0</span></div>
 
-<div id="form" style="display:none;">
 <input id="name" placeholder="Name">
 <input id="phone" placeholder="Phone">
-<input id="address" placeholder="Address">
-<input id="miles" placeholder="Distance (miles)">
-<button class="btn" onclick="generateSummary()">Review Order</button>
+<input id="address" placeholder="Delivery Address">
+
+<button class="btn" onclick="sendWhatsApp()">Place Order</button>
 </div>
-
-<div id="summaryBox" class="summary" style="display:none;"></div>
-<button id="orderBtn" class="btn" style="display:none;" onclick="sendWhatsApp()">Send Order via WhatsApp</button>
-
-<hr>
-
-<h2>📊 Admin Dashboard</h2>
-<button class="btn" onclick="loadOrders()">View Orders</button>
-<div id="orders"></div>
 
 </div>
 
-<div class="footer">
-<h3>Terms & Conditions</h3>
+<!-- STORY -->
+<div id="storyModal" style="display:none; position:fixed; background:rgba(0,0,0,0.7); width:100%; height:100%; top:0;">
+<div style="background:white; margin:10% auto; padding:20px; width:80%;">
+<span onclick="closeStory()" style="float:right; cursor:pointer;">X</span>
+<h3>Our Story</h3>
 <p>
-• All items may contain allergens. Contact before ordering.<br><br>
-• Orders may be cancelled by management.<br><br>
-• Minimum 3 hours notice.<br>
-• Desserts require 24 hours.<br><br>
-• Delivery only.
+This is not restaurant food. This is food made with heart, tradition, and love — just like home.
 </p>
+</div>
 </div>
 
 <script>
 
-let menuData = {
-"Rice":[
-{name:"Basmati Rice",price:3,desc:"Fluffy basmati rice"},
-{name:"Pilau Rice",price:3.5,desc:"Spiced rice"}
-],
-"Main":[
-{name:"Akhni Chicken",price:10,desc:"Chicken rice"},
-{name:"Lamb Tehari",price:11,desc:"Lamb rice"},
-{name:"Murogh Roast",price:11,desc:"Drumstick"},
-{name:"Lamb Rezala",price:11,desc:"Creamy curry"}
-],
-"Desserts":[
-{name:"Gulab Jamun",price:10,desc:"Sweet dessert"}
-]
-};
+let menu = [
+
+{cat:"🍚 Rice Dishes",name:"Traditional Basmati Rice",price:3,desc:"Light fluffy basmati rice"},
+{cat:"🍚 Rice Dishes",name:"Home Style Pilau Rice",price:3.5,desc:"Fragrant spiced rice"},
+
+{cat:"🍗 Main Dishes",name:"Akhni Chicken",price:10,desc:"Slow cooked chicken"},
+{cat:"🍗 Main Dishes",name:"Lamb Tehari",price:11,desc:"Spiced lamb rice"},
+{cat:"🍗 Main Dishes",name:"Murogh Roast",price:11,desc:"Roasted drumstick"},
+{cat:"🍗 Main Dishes",name:"Lamb Rezala",price:11,desc:"Creamy curry"},
+{cat:"🍗 Main Dishes",name:"Aloo Bhuna",price:11,desc:"Thick curry"},
+{cat:"🍗 Main Dishes",name:"Fish Jhol",price:9,desc:"Fish curry"},
+{cat:"🍗 Main Dishes",name:"Dim Bhuna",price:9,desc:"Egg curry"},
+
+{cat:"🥔 Vegetarian & Sides",name:"Aloo Bhajee",price:4,desc:"Fried potatoes"},
+{cat:"🥔 Vegetarian & Sides",name:"Sobji Bhuna",price:7.5,desc:"Mixed veg"},
+{cat:"🥔 Vegetarian & Sides",name:"Begun Bhaje",price:4,desc:"Aubergine"},
+
+{cat:"🍮 Desserts",name:"Egg Pudding",price:5,desc:"Caramel pudding"},
+{cat:"🍮 Desserts",name:"Gulab Jamun",price:10,desc:"Sweet dumplings"},
+{cat:"🍮 Desserts",name:"Rasmalai",price:10,desc:"Milk dessert"},
+{cat:"🍮 Desserts",name:"Birthday Cake",price:25,desc:"Custom cake"},
+
+{cat:"🥟 Snacks",name:"Chicken Samosa",price:3,desc:"Pastry"},
+{cat:"🥟 Snacks",name:"Peyaju",price:3,desc:"Fritter"},
+{cat:"🥟 Snacks",name:"Spring Roll",price:3,desc:"Roll"},
+{cat:"🥟 Snacks",name:"Murogh Pastry",price:3,desc:"Pastry"},
+{cat:"🥟 Snacks",name:"Paratha",price:1.5,desc:"Flatbread"}
+
+];
 
 let cart = {};
 
 function loadMenu(){
 let html="";
+let currentCat="";
 
-for(let cat in menuData){
-html+=`<div class="category-title">${cat}</div>`;
+menu.forEach(item=>{
 
-menuData[cat].forEach(item=>{
+if(item.cat!==currentCat){
+currentCat=item.cat;
+html+=`<div class="category">${item.cat}</div>`;
+}
+
 html+=`
 <div class="card">
 <div class="card-top">
 <span>${item.name}</span>
 <span>£${item.price}</span>
 </div>
-<div class="card-desc">${item.desc}</div>
+<div class="desc">${item.desc}</div>
 
 <div class="qty">
-<button onclick="changeQty('${item.name}',-1)">-</button>
+<button onclick="update('${item.name}',-1)">-</button>
 <span id="${item.name}">0</span>
-<button onclick="changeQty('${item.name}',1)">+</button>
+<button onclick="update('${item.name}',1)">+</button>
 </div>
 </div>`;
 });
-}
 
 document.getElementById("menu").innerHTML=html;
 }
 
-function changeQty(item,val){
-let el=document.getElementById(item);
-let num=parseInt(el.innerText)+val;
-if(num<0) num=0;
-el.innerText=num;
-cart[item]=num;
+function update(name,val){
+let el=document.getElementById(name);
+let qty=parseInt(el.innerText)+val;
+if(qty<0) qty=0;
+el.innerText=qty;
+cart[name]=qty;
+renderCart();
 }
 
-function showForm(){
-document.getElementById("form").style.display="block";
-}
-
-function calculateTotal(){
+function renderCart(){
+let html="";
 let total=0;
-for(let cat in menuData){
-menuData[cat].forEach(item=>{
+
+menu.forEach(item=>{
 let qty=cart[item.name]||0;
+if(qty>0){
+html+=`${item.name} x ${qty}<br>`;
 total+=qty*item.price;
+}
 });
-}
-return total;
-}
 
-function deliveryFee(m){
-m=parseFloat(m);
-if(m<=2) return 2;
-if(m<=5) return 4;
-if(m<=10) return 6;
-return 10;
+document.getElementById("cartItems").innerHTML=html;
+document.getElementById("total").innerText=total.toFixed(2);
 }
 
-let finalTotal=0;
-
-function generateSummary(){
-
-let miles=document.getElementById("miles").value;
-let food=calculateTotal();
-let delivery=deliveryFee(miles);
-
-finalTotal=food+delivery;
-
-let html="<h3>Order Summary</h3>";
-
-for(let item in cart){
-if(cart[item]>0){
-html+=`${item} x ${cart[item]}<br>`;
-}
-}
-
-html+=`<hr>
-Food: £${food}<br>
-Delivery: £${delivery}<br>
-<b>Total: £${finalTotal}</b>`;
-
-document.getElementById("summaryBox").innerHTML=html;
-document.getElementById("summaryBox").style.display="block";
-document.getElementById("orderBtn").style.display="block";
-}
-
-/* WHATSAPP AUTO MESSAGE */
 function sendWhatsApp(){
 
 let name=document.getElementById("name").value;
 let phone=document.getElementById("phone").value;
 let address=document.getElementById("address").value;
 
-let message = `New Order:%0A
-Name: ${name}%0A
-Phone: ${phone}%0A
-Address: ${address}%0A%0A
-Items:%0A`;
+let msg=`New Order:%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}%0A%0AItems:%0A`;
 
 for(let item in cart){
 if(cart[item]>0){
-message += `${item} x ${cart[item]}%0A`;
+msg+=`${item} x ${cart[item]}%0A`;
 }
 }
 
-message += `%0ATotal: £${finalTotal}`;
+msg+=`%0ATotal £${document.getElementById("total").innerText}`;
 
-window.open(`https://wa.me/441726806556?text=${message}`);
-
-/* SAVE ORDER */
-let order={
-name,phone,address,cart,total:finalTotal
-};
-
-let orders=JSON.parse(localStorage.getItem("orders")||"[]");
-orders.push(order);
-localStorage.setItem("orders",JSON.stringify(orders));
-
+window.open(`https://wa.me/441726806556?text=${msg}`);
 }
 
-/* DASHBOARD */
-function loadOrders(){
+function openStory(){
+document.getElementById("storyModal").style.display="block";
+}
 
-let orders=JSON.parse(localStorage.getItem("orders")||"[]");
-
-let html="";
-
-orders.forEach((o,i)=>{
-html+=`
-<div class="card">
-<b>Order ${i+1}</b><br>
-${o.name}<br>
-${o.phone}<br>
-${o.address}<br>
-Total: £${o.total}
-</div>`;
-});
-
-document.getElementById("orders").innerHTML=html;
+function closeStory(){
+document.getElementById("storyModal").style.display="none";
 }
 
 loadMenu();

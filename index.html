@@ -35,6 +35,25 @@ header {
     font-weight: bold;
 }
 
+/* 🔥 BANNER */
+.banner {
+    background: #bfa14a;
+    color: black;
+    padding: 18px;
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* 🔥 URGENCY */
+.urgency {
+    text-align: center;
+    padding: 12px;
+    background: #ff6600;
+    color: white;
+    font-weight: bold;
+}
+
 .container {
     padding: 20px;
     max-width: 600px;
@@ -129,6 +148,24 @@ footer {
     <h2>Premium Homemade Indian Food</h2>
     <p>Authentic flavours delivered or cooked at your event</p>
     <a href="event-catering.html">Book Event Catering</a>
+</div>
+
+<!-- 🔥 BUSINESS RULES -->
+<div class="banner">
+    Orders must be placed at least <strong>3 hours in advance</strong><br>
+    Open for orders <strong>9:00 AM – 9:00 PM</strong><br><br>
+
+    <strong>Minimum order: £40</strong><br>
+    Delivery charge: <strong>£1.50 per mile</strong><br>
+    Delivery areas: <strong>PL24, PL25, PL26 only</strong><br><br>
+
+    This is <strong>not restaurant-style food</strong> — authentic 
+    <strong>home-cooked Bangladeshi & Indian meals</strong>
+</div>
+
+<!-- 🔥 URGENCY -->
+<div class="urgency">
+    ⚠️ Limited slots available per day — early booking recommended
 </div>
 
 <div class="container">
@@ -239,6 +276,13 @@ function updateTotal() {
 }
 
 function checkout(){
+    let total = parseInt(document.getElementById("total").innerText);
+
+    if(total < 40){
+        alert("Minimum order is £40");
+        return;
+    }
+
     let name = document.getElementById("name").value;
     let phone = document.getElementById("phone").value;
     let address = document.getElementById("address").value;
@@ -253,16 +297,13 @@ function checkout(){
         }
     }
 
-    if(order === ""){
-        alert("Please add items first");
-        return;
-    }
-
     let message =
+    "⚠️ Limited slots per day\\n\\n" +
     "Order - Home Spice Catering\\n\\n" +
     order +
-    "\\nTotal: £" + document.getElementById("total").innerText +
-    "\\n\\nName: " + name +
+    "\\nTotal: £" + total +
+    "\\n+ Delivery (£1.50/mile)\\n\\n" +
+    "Name: " + name +
     "\\nPhone: " + phone +
     "\\nAddress: " + address +
     "\\nDelivery Time: " + time;

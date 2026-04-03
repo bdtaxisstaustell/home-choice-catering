@@ -6,243 +6,414 @@
 <title>Home Spice Catering</title>
 
 <style>
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f8f5f0;
+    font-family: 'Segoe UI', Arial;
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
 }
 
-/* NAVBAR */
-.navbar {
-    background-color: #c0392b;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* HEADER */
+header {
+    background: #020617;
+    padding: 35px 20px;
+    text-align: center;
+}
+
+header h1 {
+    color: #38bdf8;
+    font-size: 40px;
+    margin: 0;
+}
+
+.sub {
     color: white;
+    font-size: 20px;
+    margin-top: 8px;
+    font-weight: 500;
 }
 
-.brand {
-    display: flex;
-    flex-direction: column;
+/* HERO MESSAGE */
+.home-msg {
+    text-align: center;
+    padding: 14px;
+    background: #1e293b;
+    color: #facc15;
+    font-size: 16px;
+    font-weight: bold;
 }
 
-.brand small {
-    font-size: 12px;
+/* INFO BAR */
+.info-bar {
+    text-align: center;
+    background: #020617;
+    color: white;
+    padding: 12px;
+    font-size: 14px;
 }
 
 /* HERO */
 .hero {
     text-align: center;
-    padding: 100px 20px;
-    background: white;
+    padding: 25px;
 }
 
-.btn {
-    background-color: #c0392b;
+.hero h2 {
     color: white;
+    margin-bottom: 10px;
+}
+
+.hero a {
+    display: inline-block;
     padding: 12px 22px;
-    text-decoration: none;
+    background: #38bdf8;
+    color: black;
     border-radius: 6px;
-    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-/* MENU */
-.menu {
-    padding: 40px 20px;
-    max-width: 800px;
+/* CONTAINER */
+.container {
+    max-width: 900px;
     margin: auto;
+    padding: 20px;
 }
 
-.category {
-    margin-top: 30px;
+/* SECTION */
+.section-title {
+    color: white;
+    font-size: 26px;
+    margin: 25px 0 10px;
 }
 
-.category h3 {
-    color: #c0392b;
+/* CARD */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
 }
 
-.menu-item {
+/* TOP */
+.card-top {
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
-    background: white;
-    padding: 10px;
-    border-radius: 6px;
+    font-size: 22px;
+    font-weight: bold;
 }
 
-.menu-item button {
-    margin-left: 10px;
+/* BADGE */
+.badge {
+    background: #f59e0b;
+    color: white;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    margin-left: 8px;
+}
+
+/* DESC */
+.desc {
+    font-size: 15px;
+    color: #555;
+    margin: 8px 0 12px;
+}
+
+/* QTY */
+.qty {
+    display: flex;
+    align-items: center;
+}
+
+.qty button {
+    width: 36px;
+    height: 36px;
+    background: #1e40af;
+    color: white;
+    border: none;
+    font-size: 18px;
+}
+
+.qty span {
+    margin: 0 12px;
+    font-size: 18px;
+}
+
+/* BUTTON */
+.btn {
+    width: 100%;
+    padding: 16px;
+    background: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* BOX */
+.box {
+    display: none;
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+/* INPUT */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
 }
 
 /* CART */
 .cart {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     background: white;
-    padding: 20px;
-    margin-top: 30px;
-    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    font-size: 16px;
 }
 
-.footer {
-    background: #222;
-    color: #aaa;
-    text-align: center;
-    padding: 20px;
-}
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-    <div class="brand">
-        <strong>Home Spice Catering</strong>
-        <small>Powered by Trina’s Cloud Kitchen</small>
-    </div>
+<header>
+<h1>Home Spice Catering</h1>
+<div class="sub">Powered by Trina’s Cloud Kitchen</div>
+</header>
+
+<div class="home-msg">
+🍛 Not restaurant food — real homemade Indian & Bangladeshi cooking, prepared fresh with traditional recipes
 </div>
 
-<!-- HERO -->
+<div class="info-bar">
+🚚 Delivery Only • ⏱ 3 Hour Notice Required • 🕘 Open 9AM – 9PM
+</div>
+
 <div class="hero">
-    <h2>Real Homemade Indian & Bangladeshi Food</h2>
-    <p>Not restaurant style — just proper home cooking</p>
-    <a href="#menu" class="btn">Order Now</a>
+<h2>Fresh Home-Cooked Meals Delivered</h2>
+<a href="event-catering.html">Book Event Catering</a>
 </div>
 
-<!-- MENU -->
-<div id="menu" class="menu">
+<div class="container">
 
-    <div class="category">
-        <h3>Rice & Bowl Meals</h3>
+<div class="section-title">Main Menu</div>
 
-        <div class="menu-item">
-            Chicken Biryani – £9.99
-            <button onclick="addToCart('Chicken Biryani',9.99)">Add</button>
-        </div>
+<!-- ITEMS -->
+<div class="card">
+<div class="card-top">
+<span>Chicken Biryani <span class="badge">Popular</span></span>
+<span>£14</span>
+</div>
+<div class="desc">Fragrant basmati rice with tender spiced chicken.</div>
+<div class="qty">
+<button onclick="changeQty('biryani',-1)">-</button>
+<span id="biryani">0</span>
+<button onclick="changeQty('biryani',1)">+</button>
+</div>
+</div>
 
-        <div class="menu-item">
-            Lamb Akhni – £10.99
-            <button onclick="addToCart('Lamb Akhni',10.99)">Add</button>
-        </div>
+<div class="card">
+<div class="card-top">
+<span>Lamb Akhni <span class="badge">Popular</span></span>
+<span>£15</span>
+</div>
+<div class="desc">Aromatic rice dish with slow-cooked lamb.</div>
+<div class="qty">
+<button onclick="changeQty('akhni',-1)">-</button>
+<span id="akhni">0</span>
+<button onclick="changeQty('akhni',1)">+</button>
+</div>
+</div>
 
-        <div class="menu-item">
-            Rajma Chawal – £6.99
-            <button onclick="addToCart('Rajma Chawal',6.99)">Add</button>
-        </div>
+<div class="card">
+<div class="card-top"><span>Chicken Curry</span><span>£15</span></div>
+<div class="desc">Classic home-style chicken curry.</div>
+<div class="qty">
+<button onclick="changeQty('chickenCurry',-1)">-</button>
+<span id="chickenCurry">0</span>
+<button onclick="changeQty('chickenCurry',1)">+</button>
+</div>
+</div>
 
-        <div class="menu-item">
-            Chole Chawal – £6.99
-            <button onclick="addToCart('Chole Chawal',6.99)">Add</button>
-        </div>
-    </div>
+<div class="card">
+<div class="card-top"><span>Beef Curry</span><span>£15</span></div>
+<div class="desc">Rich and hearty beef curry.</div>
+<div class="qty">
+<button onclick="changeQty('beef',-1)">-</button>
+<span id="beef">0</span>
+<button onclick="changeQty('beef',1)">+</button>
+</div>
+</div>
 
-    <div class="category">
-        <h3>Curries</h3>
+<div class="card">
+<div class="card-top"><span>Dal</span><span>£7</span></div>
+<div class="desc">Comforting lentil curry.</div>
+<div class="qty">
+<button onclick="changeQty('dal',-1)">-</button>
+<span id="dal">0</span>
+<button onclick="changeQty('dal',1)">+</button>
+</div>
+</div>
 
-        <div class="menu-item">
-            Butter Chicken – £9.99
-            <button onclick="addToCart('Butter Chicken',9.99)">Add</button>
-        </div>
+<div class="card">
+<div class="card-top"><span>Aloo Bhaji</span><span>£8</span></div>
+<div class="desc">Spiced potatoes with herbs.</div>
+<div class="qty">
+<button onclick="changeQty('aloo',-1)">-</button>
+<span id="aloo">0</span>
+<button onclick="changeQty('aloo',1)">+</button>
+</div>
+</div>
 
-        <div class="menu-item">
-            Chicken Curry – £8.99
-            <button onclick="addToCart('Chicken Curry',8.99)">Add</button>
-        </div>
+<!-- DESSERT -->
+<div class="section-title">Desserts</div>
 
-        <div class="menu-item">
-            Paneer Butter Masala – £8.99
-            <button onclick="addToCart('Paneer Butter Masala',8.99)">Add</button>
-        </div>
+<div class="card">
+<div class="card-top"><span>Gulab Jamun</span><span>£10</span></div>
+<div class="desc">Soft syrup-soaked milk dumplings.</div>
+<div class="qty">
+<button onclick="changeQty('gulab',-1)">-</button>
+<span id="gulab">0</span>
+<button onclick="changeQty('gulab',1)">+</button>
+</div>
+</div>
 
-        <div class="menu-item">
-            Egg Curry – £7.99
-            <button onclick="addToCart('Egg Curry',7.99)">Add</button>
-        </div>
-    </div>
+<div class="card">
+<div class="card-top"><span>Rasmalai</span><span>£10</span></div>
+<div class="desc">Creamy milk dessert.</div>
+<div class="qty">
+<button onclick="changeQty('rasmalai',-1)">-</button>
+<span id="rasmalai">0</span>
+<button onclick="changeQty('rasmalai',1)">+</button>
+</div>
+</div>
 
-    <div class="category">
-        <h3>Add-ons & Sides</h3>
+<div class="card">
+<div class="card-top"><span>Birthday Cake</span><span>£25</span></div>
+<div class="desc">Fresh celebration cake for birthdays.</div>
+<div class="qty">
+<button onclick="changeQty('cake',-1)">-</button>
+<span id="cake">0</span>
+<button onclick="changeQty('cake',1)">+</button>
+</div>
+</div>
 
-        <div class="menu-item">
-            Aloo Paratha – £4.99
-            <button onclick="addToCart('Aloo Paratha',4.99)">Add</button>
-        </div>
+<button class="btn" onclick="showSummary()">Confirm Order</button>
 
-        <div class="menu-item">
-            Gulab Jamun – £2.99
-            <button onclick="addToCart('Gulab Jamun',2.99)">Add</button>
-        </div>
-    </div>
+<div class="box" id="summaryBox">
+<h3>Order Summary</h3>
+<p id="summaryText"></p>
+<button class="btn" onclick="showForm()">Continue</button>
+</div>
 
-    <!-- CART -->
-    <div class="cart">
-        <h3>Your Order</h3>
-        <ul id="cartList"></ul>
-        <p><strong>Total: £<span id="total">0</span></strong></p>
+<div class="box" id="formBox">
+<h3>Delivery Details</h3>
 
-        <input type="text" id="address" placeholder="Enter delivery address" style="width:100%;padding:10px;margin-top:10px;">
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
+<input id="address" placeholder="Address">
 
-        <br><br>
-        <button class="btn" onclick="sendWhatsApp()">Send Order via WhatsApp</button>
-    </div>
+<label>Distance (miles)</label>
+<input id="miles">
+
+<label>Date</label>
+<input type="date" id="date">
+
+<label>Time</label>
+<select id="time">
+<option>12:00</option>
+<option>14:00</option>
+<option>16:00</option>
+<option>18:00</option>
+<option>20:00</option>
+</select>
+
+<button class="btn" onclick="checkout()">Place Order</button>
+</div>
 
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-    <p><strong>Home Spice Catering</strong></p>
-    <p>Powered by Trina’s Cloud Kitchen</p>
+<div class="cart">
+Total: £<span id="total">0</span>
 </div>
 
 <script>
-let cart = [];
-let total = 0;
 
-function addToCart(name, price) {
-    cart.push({name, price});
-    total += price;
-    updateCart();
+let prices = {
+biryani:14, akhni:15, chickenCurry:15, beef:15,
+dal:7, aloo:8, gulab:10, rasmalai:10, cake:25
+};
+
+let itemNames = {
+biryani:"Chicken Biryani", akhni:"Lamb Akhni",
+chickenCurry:"Chicken Curry", beef:"Beef Curry",
+dal:"Dal", aloo:"Aloo Bhaji",
+gulab:"Gulab Jamun", rasmalai:"Rasmalai",
+cake:"Birthday Cake"
+};
+
+function changeQty(id, change){
+let el=document.getElementById(id);
+let val=parseInt(el.innerText)+change;
+if(val<0) val=0;
+el.innerText=val;
+updateTotal();
 }
 
-function updateCart() {
-    let list = document.getElementById("cartList");
-    list.innerHTML = "";
-
-    cart.forEach(item => {
-        let li = document.createElement("li");
-        li.textContent = item.name + " - £" + item.price.toFixed(2);
-        list.appendChild(li);
-    });
-
-    document.getElementById("total").innerText = total.toFixed(2);
+function updateTotal(){
+let total=0;
+for(let i in prices){
+let qty=parseInt(document.getElementById(i).innerText);
+total+=qty*prices[i];
+}
+document.getElementById("total").innerText=total;
 }
 
-function sendWhatsApp() {
-    let address = document.getElementById("address").value;
+function showSummary(){
+let total=parseInt(document.getElementById("total").innerText);
+if(total<40){ alert("Minimum £40"); return; }
 
-    if(cart.length === 0){
-        alert("Cart is empty!");
-        return;
-    }
-
-    if(address === ""){
-        alert("Please enter address");
-        return;
-    }
-
-    let message = "🧾 *Home Spice Catering Order*\n\n";
-
-    cart.forEach(item => {
-        message += item.name + " - £" + item.price.toFixed(2) + "\n";
-    });
-
-    message += "\nTotal: £" + total.toFixed(2);
-    message += "\n\n📍 Address: " + address;
-
-    let url = "https://wa.me/441726806556?text=" + encodeURIComponent(message);
-
-    window.open(url, "_blank");
+let text="";
+for(let i in itemNames){
+let qty=document.getElementById(i).innerText;
+if(qty>0){ text+=itemNames[i]+" x"+qty+"<br>"; }
 }
+document.getElementById("summaryText").innerHTML=text;
+document.getElementById("summaryBox").style.display="block";
+}
+
+function showForm(){
+document.getElementById("formBox").style.display="block";
+}
+
+function checkout(){
+let total=parseFloat(document.getElementById("total").innerText);
+let miles=parseFloat(document.getElementById("miles").value||0);
+let delivery=miles*1.5;
+let finalTotal=total+delivery;
+
+let date=document.getElementById("date").value;
+let time=document.getElementById("time").value;
+
+let now=new Date();
+let orderTime=new Date(date+"T"+time);
+let diff=(orderTime-now)/(1000*60*60);
+
+if(diff<3){ alert("Minimum 3 hours notice required"); return; }
+
+let msg="🍛 Order\nTotal: £"+finalTotal.toFixed(2)+"\nDate:"+date+" "+time;
+
+window.open("https://wa.me/441726806556?text="+encodeURIComponent(msg));
+}
+
 </script>
 
 </body>

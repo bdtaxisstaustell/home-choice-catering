@@ -26,6 +26,15 @@ header h1 {
     color: #ff5a00;
 }
 
+/* INTRO STRIP */
+.intro {
+    background: #fff3e8;
+    padding: 14px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
 /* NAV */
 .nav {
     text-align: center;
@@ -44,16 +53,12 @@ header h1 {
 /* HERO */
 .hero {
     text-align: center;
-    padding: 30px 20px;
-}
-
-.hero h2 {
-    margin-bottom: 10px;
+    padding: 25px 20px;
 }
 
 .hero a {
     display: inline-block;
-    margin-top: 15px;
+    margin-top: 10px;
     padding: 10px 18px;
     background: #ff5a00;
     color: white;
@@ -63,20 +68,31 @@ header h1 {
 
 /* BANNER */
 .banner {
-    background: #fff3e8;
-    padding: 12px;
+    background: #fff;
+    padding: 10px;
     text-align: center;
     font-size: 14px;
     border-bottom: 1px solid #eee;
 }
 
-/* SECTION */
+/* URGENCY */
+.urgency {
+    background: #ff5a00;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* CONTAINER */
 .container {
     max-width: 650px;
     margin: auto;
     padding: 20px;
 }
 
+/* TITLES */
 .section-title {
     margin-top: 20px;
     margin-bottom: 10px;
@@ -84,7 +100,7 @@ header h1 {
     font-weight: bold;
 }
 
-/* MENU CARD */
+/* MENU */
 .card {
     background: white;
     border-radius: 10px;
@@ -170,6 +186,12 @@ footer {
     <p>Powered by Trina's Kitchen</p>
 </header>
 
+<!-- 🔥 TOP INTRO -->
+<div class="intro">
+    Home Spice Catering is a home-based kitchen powered by <strong>Trina’s Kitchen</strong>, 
+    offering authentic Bangladeshi and Indian home-style cooking — not restaurant food.
+</div>
+
 <div class="nav">
     <a href="#">Menu</a>
     <a href="event-catering.html">Book Event Catering</a>
@@ -178,13 +200,17 @@ footer {
 </div>
 
 <div class="hero">
-    <h2>Authentic Homemade Bangladeshi & Indian Food</h2>
-    <p>Freshly cooked, delivered or prepared at your event</p>
+    <h2>Fresh Homemade Food</h2>
+    <p>Authentic flavours delivered to your door</p>
     <a href="event-catering.html">Book Catering</a>
 </div>
 
 <div class="banner">
-    Minimum order £40 • Delivery £1.50/mile • PL24/25/26 • Order 3 hours in advance • Limited slots daily
+    Minimum order £40 • £1.50/mile • PL24/25/26 • Order 3hrs before • 9AM–9PM
+</div>
+
+<div class="urgency">
+    ⚠️ Limited slots available per day — early booking recommended
 </div>
 
 <div class="container">
@@ -193,7 +219,6 @@ footer {
 
     <div class="card">
         <h3>Lamb Akhni (£14)</h3>
-        <p>Fragrant rice with tender lamb.</p>
         <div class="qty">
             <button onclick="changeQty('akhni', -1)">-</button>
             <span id="akhni">0</span>
@@ -203,7 +228,6 @@ footer {
 
     <div class="card">
         <h3>Chicken Biryani (£14)</h3>
-        <p>Classic spiced rice with chicken.</p>
         <div class="qty">
             <button onclick="changeQty('biryani', -1)">-</button>
             <span id="biryani">0</span>
@@ -213,7 +237,6 @@ footer {
 
     <div class="card">
         <h3>Gulab Jamun (£10)</h3>
-        <p>Sweet syrup dumplings.</p>
         <div class="qty">
             <button onclick="changeQty('gulab', -1)">-</button>
             <span id="gulab">0</span>
@@ -223,7 +246,6 @@ footer {
 
     <div class="card">
         <h3>Rasmalai (£10)</h3>
-        <p>Soft milk dessert.</p>
         <div class="qty">
             <button onclick="changeQty('rasmalai', -1)">-</button>
             <span id="rasmalai">0</span>
@@ -233,7 +255,6 @@ footer {
 
     <div class="card">
         <h3>Chicken Curry (£15)</h3>
-        <p>Authentic home-style curry.</p>
         <div class="qty">
             <button onclick="changeQty('curry', -1)">-</button>
             <span id="curry">0</span>
@@ -257,11 +278,8 @@ footer {
     </div>
 
     <div id="about" class="form-box">
-        <div class="section-title">About Us</div>
-        <p>
-            Home Spice Catering is a home-based kitchen powered by Trina’s Kitchen, 
-            offering authentic Bangladeshi and Indian home-style cooking — not restaurant food.
-        </p>
+        <div class="section-title">About</div>
+        <p>Authentic home cooking from Trina’s Kitchen — fresh, traditional, and made with care.</p>
     </div>
 
     <div id="opening" class="form-box">
@@ -315,10 +333,11 @@ function checkout(){
         return;
     }
 
-    let message = "Order from Home Spice Catering\\nTotal: £" + total;
-
     let phone = "44XXXXXXXXXX";
-    window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(message));
+
+    let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent("Order total £" + total);
+
+    window.open(url, "_blank");
 }
 </script>
 

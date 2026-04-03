@@ -9,16 +9,24 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: #0f0f0f;
-    color: #f5f5f5;
+    background: #121212;
+    color: #f1f1f1;
 }
 
+/* HEADER */
 header {
-    background: linear-gradient(135deg, #1a1a1a, #bfa14a);
+    background: #1f1f1f;
     padding: 25px;
     text-align: center;
+    border-bottom: 2px solid #ff6b00;
 }
 
+header h1 {
+    margin: 0;
+    color: #ff6b00;
+}
+
+/* HERO */
 .hero {
     text-align: center;
     padding: 30px 20px;
@@ -28,45 +36,56 @@ header {
     display: inline-block;
     margin-top: 15px;
     padding: 12px 18px;
-    background: #bfa14a;
-    color: black;
+    background: #ff6b00;
+    color: white;
     border-radius: 6px;
     text-decoration: none;
     font-weight: bold;
 }
 
-/* 🔥 BANNER */
-.banner {
-    background: #bfa14a;
-    color: black;
-    padding: 18px;
+/* BRAND TAG */
+.brand {
     text-align: center;
-    font-weight: 500;
-    line-height: 1.6;
+    font-size: 14px;
+    color: #aaa;
+    margin-top: -10px;
 }
 
-/* 🔥 URGENCY */
+/* BANNER */
+.banner {
+    background: #1f1f1f;
+    padding: 18px;
+    text-align: center;
+    line-height: 1.6;
+    border-bottom: 1px solid #333;
+}
+
+/* URGENCY */
 .urgency {
     text-align: center;
     padding: 12px;
-    background: #ff6600;
+    background: #ff6b00;
     color: white;
     font-weight: bold;
 }
 
+/* CONTAINER */
 .container {
     padding: 20px;
     max-width: 600px;
     margin: auto;
 }
 
+/* MENU */
 .card {
-    background: #1c1c1c;
-    border-radius: 12px;
+    background: #1f1f1f;
+    border-radius: 10px;
     padding: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    border: 1px solid #2a2a2a;
 }
 
+/* QTY */
 .qty {
     display: flex;
     align-items: center;
@@ -77,22 +96,23 @@ header {
     width: 35px;
     height: 35px;
     border: none;
-    background: #bfa14a;
-    color: black;
+    background: #ff6b00;
+    color: white;
     font-size: 18px;
-    cursor: pointer;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .qty span {
     margin: 0 12px;
 }
 
+/* FORM */
 .form-box {
-    background: #1c1c1c;
+    background: #1f1f1f;
     padding: 20px;
-    border-radius: 12px;
-    margin-top: 30px;
+    border-radius: 10px;
+    margin-top: 25px;
 }
 
 input, select {
@@ -106,6 +126,7 @@ input, select {
     color: white;
 }
 
+/* CART */
 .cart {
     position: fixed;
     bottom: 0;
@@ -113,14 +134,14 @@ input, select {
     background: #000;
     padding: 15px;
     text-align: center;
-    border-top: 2px solid #bfa14a;
+    border-top: 2px solid #ff6b00;
 }
 
 .checkout-btn {
     width: 90%;
     padding: 12px;
-    background: #bfa14a;
-    color: black;
+    background: #ff6b00;
+    color: white;
     border: none;
     font-size: 16px;
     margin-top: 10px;
@@ -128,11 +149,12 @@ input, select {
     cursor: pointer;
 }
 
+/* FOOTER */
 footer {
     text-align: center;
     padding: 20px;
     font-size: 14px;
-    color: #aaa;
+    color: #888;
 }
 </style>
 </head>
@@ -144,28 +166,29 @@ footer {
     <p>Homemade Indian Food • Delivery & Event Catering • St Austell</p>
 </header>
 
+<div class="brand">
+    Powered by <strong>Trina's Kitchen</strong> 🍲
+</div>
+
 <div class="hero">
-    <h2>Premium Homemade Indian Food</h2>
-    <p>Authentic flavours delivered or cooked at your event</p>
+    <h2>Authentic Homemade Food</h2>
+    <p>Traditional Bangladeshi & Indian home-style cooking</p>
     <a href="event-catering.html">Book Event Catering</a>
 </div>
 
-<!-- 🔥 BUSINESS RULES -->
 <div class="banner">
     Orders must be placed at least <strong>3 hours in advance</strong><br>
-    Open for orders <strong>9:00 AM – 9:00 PM</strong><br><br>
+    Open <strong>9:00 AM – 9:00 PM</strong><br><br>
 
     <strong>Minimum order: £40</strong><br>
-    Delivery charge: <strong>£1.50 per mile</strong><br>
-    Delivery areas: <strong>PL24, PL25, PL26 only</strong><br><br>
+    Delivery: <strong>£1.50 per mile</strong><br>
+    Areas: <strong>PL24, PL25, PL26</strong><br><br>
 
-    This is <strong>not restaurant-style food</strong> — authentic 
-    <strong>home-cooked Bangladeshi & Indian meals</strong>
+    This is not restaurant-style food — authentic home cooking by Trina’s Kitchen.
 </div>
 
-<!-- 🔥 URGENCY -->
 <div class="urgency">
-    ⚠️ Limited slots available per day — early booking recommended
+    ⚠️ Limited slots per day — early booking recommended
 </div>
 
 <div class="container">
@@ -245,7 +268,7 @@ footer {
 </div>
 
 <footer>
-    <p>© 2026 Home Spice Catering • St Austell</p>
+    <p>© 2026 Home Spice Catering • Powered by Trina’s Kitchen</p>
 </footer>
 
 <script>
@@ -298,12 +321,10 @@ function checkout(){
     }
 
     let message =
-    "⚠️ Limited slots per day\\n\\n" +
     "Order - Home Spice Catering\\n\\n" +
     order +
     "\\nTotal: £" + total +
-    "\\n+ Delivery (£1.50/mile)\\n\\n" +
-    "Name: " + name +
+    "\\n\\nName: " + name +
     "\\nPhone: " + phone +
     "\\nAddress: " + address +
     "\\nDelivery Time: " + time;

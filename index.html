@@ -6,112 +6,145 @@
 <title>Home Spice Catering</title>
 
 <style>
+
+/* GLOBAL */
 body {
     margin: 0;
-    font-family: Arial;
-    background: linear-gradient(to bottom,#0f172a,#1e293b);
+    font-family: 'Segoe UI', Arial;
+    background: linear-gradient(180deg, #0b1120, #1f2937);
 }
 
 /* HEADER */
 header {
-    background:#020617;
-    padding:25px;
-    text-align:center;
+    background: #020617;
+    padding: 30px;
+    text-align: center;
 }
-header h1 { color:#38bdf8; margin:0; }
-.sub { color:white; }
 
-/* BARS */
-.home-msg {
-    text-align:center;
-    background:#1e293b;
-    color:#facc15;
-    padding:10px;
-    font-weight:bold;
+header h1 {
+    color: #38bdf8;
+    margin: 0;
 }
+
+.sub { color: #cbd5f5; }
+
+/* TOP BARS */
+.home-msg {
+    text-align: center;
+    padding: 10px;
+    background: #1e293b;
+    color: #facc15;
+    font-weight: bold;
+}
+
 .info-bar {
-    text-align:center;
-    background:#020617;
-    color:white;
-    padding:10px;
+    text-align: center;
+    background: #020617;
+    color: white;
+    padding: 10px;
 }
 
 /* HERO */
 .hero {
-    text-align:center;
-    padding:20px;
+    text-align: center;
+    padding: 20px;
 }
+
 .hero a {
-    padding:10px 15px;
-    margin:5px;
-    background:#38bdf8;
-    border-radius:6px;
-    text-decoration:none;
-    color:black;
+    display: inline-block;
+    margin: 6px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
 }
+
+.btn-blue { background: #38bdf8; color: black; }
+.btn-yellow { background: #facc15; color: black; }
 
 /* CONTAINER */
 .container {
-    max-width:900px;
-    margin:auto;
-    padding:20px;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
 }
 
 /* CARD */
 .card {
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    margin-bottom:10px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
+
 .card-top {
-    display:flex;
-    justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 /* QTY */
 .qty button {
-    width:30px;
-    height:30px;
-    background:#1e40af;
-    color:white;
-    border:none;
+    width: 30px;
+    height: 30px;
+    background: #1e40af;
+    color: white;
+    border: none;
 }
-.qty span { margin:0 10px; }
+.qty span { margin: 0 10px; }
 
 /* INPUT */
-input,select {
-    width:100%;
-    padding:10px;
-    margin-top:10px;
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
 }
 
 /* BUTTON */
 .btn {
-    width:100%;
-    padding:15px;
-    background:#1e40af;
-    color:white;
-    border:none;
-    margin-top:15px;
+    width: 100%;
+    padding: 15px;
+    background: #1e40af;
+    color: white;
+    border: none;
+    margin-top: 15px;
+    border-radius: 6px;
 }
 
-/* BOX */
-.box {
-    display:none;
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    margin-top:15px;
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 25px;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close {
+    float: right;
+    font-size: 22px;
+    cursor: pointer;
 }
 
 /* FOOTER */
 .footer {
-    background:#020617;
-    color:white;
-    padding:20px;
-    font-size:14px;
+    background: #020617;
+    color: white;
+    padding: 20px;
+    font-size: 14px;
 }
+
 </style>
 </head>
 
@@ -123,34 +156,26 @@ input,select {
 </header>
 
 <div class="home-msg">
-🚚 DELIVERY ONLY • Homemade Indian & Bangladeshi food
+🚚 DELIVERY ONLY • Real homemade Indian & Bangladeshi food
 </div>
 
 <div class="info-bar">
-⏱ Minimum 3 hours notice • Desserts 24h notice • 9AM–9PM
+⏱ 3 hours notice • Desserts 24h • 9AM–9PM
 </div>
 
 <div class="hero">
-<a href="#">Book Event Catering</a>
-<a href="#" onclick="toggleStory()" style="background:#facc15;">Our Story</a>
+<a href="https://wa.me/441726806556?text=Event%20Catering%20Enquiry" class="btn-blue">Book Event Catering</a>
+<a href="#" onclick="openStory()" class="btn-yellow">Our Story</a>
 </div>
 
 <div class="container">
-
-<div class="box" id="storyBox">
-<h3>Our Story — From Heart to Home</h3>
-<p>
-This is food made with care, tradition, and heart — just like home.
-</p>
-</div>
 
 <h2 style="color:white;">Menu</h2>
 <div id="menu"></div>
 
 <button class="btn" onclick="showForm()">Continue Order</button>
 
-<div class="box" id="formBox">
-
+<div id="formBox" style="display:none; background:white; padding:15px; border-radius:10px; margin-top:15px;">
 <h3>Delivery Details</h3>
 
 <input id="name" placeholder="Name">
@@ -158,7 +183,7 @@ This is food made with care, tradition, and heart — just like home.
 <input id="address" placeholder="Address">
 
 <label>Distance (miles)</label>
-<input id="miles" placeholder="e.g 3">
+<input id="miles">
 
 <label>Date</label>
 <input type="date" id="date">
@@ -173,17 +198,43 @@ This is food made with care, tradition, and heart — just like home.
 </select>
 
 <button class="btn" onclick="checkout()">Place Order</button>
+</div>
 
 </div>
 
+<!-- STORY MODAL -->
+<div id="storyModal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeStory()">&times;</span>
+
+<h3>Our Story — From Heart to Home</h3>
+
+<p>
+For Ms Trina, cooking has never been just about food — it has always been about care, comfort, and connection.
+
+<br><br>
+From a young age, she found joy in the kitchen. The sound of spices crackling, the warmth of a home-cooked meal, and the smiles that followed — this is where her passion truly lived.
+
+<br><br>
+For the past eight years, she held onto a dream — to share real homemade Indian and Bangladeshi food.
+
+<br><br>
+Today, that dream is reality.
+
+<br><br>
+<strong>This is not restaurant food.</strong><br>
+This is food made with care, tradition, and heart — just like home.
+</p>
+
+</div>
 </div>
 
 <div class="footer">
 <h3>Terms & Conditions</h3>
 <p>
-• All items may contain allergens.<br><br>
-• Management can cancel orders.<br><br>
-• Minimum 3 hours notice required.<br>
+• All items may contain allergens. Contact before ordering.<br><br>
+• Management may cancel orders.<br><br>
+• Minimum 3 hours notice.<br>
 • Desserts require 24 hours.<br><br>
 • Delivery only.
 </p>
@@ -191,7 +242,7 @@ This is food made with care, tradition, and heart — just like home.
 
 <script>
 
-let items={
+let items = {
 "Basmati Rice":3,
 "Pilau Rice":3.5,
 "Akhni Chicken":10,
@@ -200,22 +251,10 @@ let items={
 "Lamb Rezala":11,
 "Aloo Bhuna":10,
 "Fish Jhol":9,
-"Dim Bhuna":9,
-"Sobji Bhuna":7.5,
-"Aloo Bhajee":4,
-"Begun Bhaje":4,
-"Chicken Samosa":3,
-"Peyaju":3,
-"Spring Roll":3,
-"Murgh Pastry":3,
-"Paratha":1.5,
-"Egg Pudding":5,
-"Gulab Jamun":10,
-"Rosmalai":10,
-"Cake":25
+"Dim Bhuna":9
 };
 
-let cart={};
+let cart = {};
 
 function loadMenu(){
 let html="";
@@ -245,66 +284,20 @@ cart[item]=val;
 }
 
 function showForm(){
-let hasItem=false;
-for(let i in cart){
-if(cart[i]>0) hasItem=true;
-}
-if(!hasItem){
-alert("Select items first");
-return;
-}
 document.getElementById("formBox").style.display="block";
 }
 
 function checkout(){
-
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-let address=document.getElementById("address").value;
-let miles=parseFloat(document.getElementById("miles").value||0);
-
-let date=document.getElementById("date").value;
-let time=document.getElementById("time").value;
-
-let now=new Date();
-let orderTime=new Date(date+"T"+time);
-let diff=(orderTime-now)/(1000*60*60);
-
-if(diff<3){
-alert("Minimum 3 hours notice required");
-return;
+window.open("https://wa.me/441726806556");
 }
 
-let total=0;
-let msg="🍛 Home Spice Order\n\n";
-
-for(let item in cart){
-if(cart[item]>0){
-let qty=cart[item];
-let price=items[item];
-total+=qty*price;
-msg+=item+" x"+qty+"\n";
-}
+/* STORY MODAL */
+function openStory(){
+document.getElementById("storyModal").style.display="block";
 }
 
-let delivery=miles*1.5;
-let finalTotal=total+delivery;
-
-msg+=`\nFood: £${total.toFixed(2)}`;
-msg+=`\nDelivery: £${delivery.toFixed(2)}`;
-msg+=`\nTotal: £${finalTotal.toFixed(2)}\n`;
-
-msg+=`\nName: ${name}`;
-msg+=`\nPhone: ${phone}`;
-msg+=`\nAddress: ${address}`;
-msg+=`\nTime: ${date} ${time}`;
-
-window.open("https://wa.me/441726806556?text="+encodeURIComponent(msg));
-}
-
-function toggleStory(){
-let box=document.getElementById("storyBox");
-box.style.display=box.style.display==="block"?"none":"block";
+function closeStory(){
+document.getElementById("storyModal").style.display="none";
 }
 
 loadMenu();

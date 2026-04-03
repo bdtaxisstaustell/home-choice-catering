@@ -13,48 +13,38 @@ body {
     background: linear-gradient(to bottom, #0f172a, #1e293b);
 }
 
-/* NAVBAR */
-.nav {
-    background: #020617;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    flex-wrap: wrap;
-}
-
-.nav button {
-    background: #1e40af;
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
 /* HEADER */
 header {
+    background: #020617;
+    padding: 30px;
     text-align: center;
-    padding: 25px;
 }
 
 header h1 {
     color: #38bdf8;
-    font-size: 36px;
+    font-size: 40px;
+    margin: 0;
 }
 
 .sub {
     color: white;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 /* MESSAGE */
 .home-msg {
     text-align: center;
-    padding: 12px;
+    padding: 14px;
     background: #1e293b;
     color: #facc15;
     font-weight: bold;
+}
+
+/* INFO */
+.info-bar {
+    text-align: center;
+    color: white;
+    padding: 10px;
 }
 
 /* HERO */
@@ -67,11 +57,28 @@ header h1 {
     color: white;
 }
 
+.hero a {
+    background: #38bdf8;
+    padding: 12px 20px;
+    display: inline-block;
+    border-radius: 6px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
 /* CONTAINER */
 .container {
     max-width: 900px;
     margin: auto;
     padding: 20px;
+}
+
+/* SECTION */
+.section-title {
+    color: white;
+    font-size: 26px;
+    margin: 25px 0 10px;
 }
 
 /* CARD */
@@ -85,19 +92,20 @@ header h1 {
 .card-top {
     display: flex;
     justify-content: space-between;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
 }
 
 .desc {
-    font-size: 14px;
+    font-size: 15px;
+    color: #555;
     margin: 8px 0;
 }
 
 /* QTY */
 .qty button {
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
     background: #1e40af;
     color: white;
     border: none;
@@ -105,35 +113,32 @@ header h1 {
 
 .qty span {
     margin: 0 10px;
+    font-size: 18px;
 }
 
 /* BUTTON */
 .btn {
     width: 100%;
-    padding: 14px;
+    padding: 16px;
     background: #1e40af;
     color: white;
     border: none;
     margin-top: 10px;
 }
 
-/* MODAL */
-.modal {
+/* FORM */
+.box {
     display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    overflow: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
-.modal-content {
-    background: white;
-    margin: 40px auto;
-    padding: 20px;
-    max-width: 600px;
-    border-radius: 10px;
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
 }
 
 /* CART */
@@ -142,7 +147,7 @@ header h1 {
     bottom: 0;
     width: 100%;
     background: white;
-    padding: 10px;
+    padding: 12px;
     text-align: center;
 }
 
@@ -150,14 +155,6 @@ header h1 {
 </head>
 
 <body>
-
-<!-- NAVBAR -->
-<div class="nav">
-<button onclick="scrollToTop()">Home</button>
-<button onclick="openStory()">Home Kitchen Story</button>
-<button onclick="window.location.href='event-catering.html'">Book Event Catering</button>
-<button onclick="showOpening()">Opening Time</button>
-</div>
 
 <header>
 <h1>Home Spice Catering</h1>
@@ -168,11 +165,20 @@ header h1 {
 🍛 Not restaurant food — real homemade Indian & Bangladeshi cooking, prepared fresh with traditional recipes
 </div>
 
+<div class="info-bar">
+🚚 Delivery Only • ⏱ 3 Hour Notice Required • 🕘 Open 9AM – 9PM
+</div>
+
 <div class="hero">
 <h2>Fresh Home-Cooked Meals Delivered</h2>
+<a href="event-catering.html">Book Event Catering</a>
 </div>
 
 <div class="container">
+
+<div class="section-title">Main Menu</div>
+
+<!-- MAIN ITEMS -->
 
 <div class="card">
 <div class="card-top"><span>Chicken Biryani</span><span>£14</span></div>
@@ -186,7 +192,7 @@ header h1 {
 
 <div class="card">
 <div class="card-top"><span>Lamb Akhni</span><span>£15</span></div>
-<div class="desc">Aromatic rice with slow-cooked lamb.</div>
+<div class="desc">Aromatic rice dish with slow-cooked lamb.</div>
 <div class="qty">
 <button onclick="changeQty('akhni',-1)">-</button>
 <span id="akhni">0</span>
@@ -194,10 +200,72 @@ header h1 {
 </div>
 </div>
 
-<!-- DESSERT -->
+<div class="card">
+<div class="card-top"><span>Chicken Curry</span><span>£15</span></div>
+<div class="desc">Classic home-style chicken curry.</div>
+<div class="qty">
+<button onclick="changeQty('chickenCurry',-1)">-</button>
+<span id="chickenCurry">0</span>
+<button onclick="changeQty('chickenCurry',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Beef Curry</span><span>£15</span></div>
+<div class="desc">Rich beef curry full of flavour.</div>
+<div class="qty">
+<button onclick="changeQty('beef',-1)">-</button>
+<span id="beef">0</span>
+<button onclick="changeQty('beef',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Dal</span><span>£7</span></div>
+<div class="desc">Comforting lentil curry.</div>
+<div class="qty">
+<button onclick="changeQty('dal',-1)">-</button>
+<span id="dal">0</span>
+<button onclick="changeQty('dal',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Aloo Bhaji</span><span>£8</span></div>
+<div class="desc">Spiced potatoes with herbs.</div>
+<div class="qty">
+<button onclick="changeQty('aloo',-1)">-</button>
+<span id="aloo">0</span>
+<button onclick="changeQty('aloo',1)">+</button>
+</div>
+</div>
+
+<!-- DESSERT SECTION -->
+<div class="section-title">Desserts</div>
+
+<div class="card">
+<div class="card-top"><span>Gulab Jamun</span><span>£10</span></div>
+<div class="desc">Sweet syrup dumplings.</div>
+<div class="qty">
+<button onclick="changeQty('gulab',-1)">-</button>
+<span id="gulab">0</span>
+<button onclick="changeQty('gulab',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Rasmalai</span><span>£10</span></div>
+<div class="desc">Creamy milk dessert.</div>
+<div class="qty">
+<button onclick="changeQty('rasmalai',-1)">-</button>
+<span id="rasmalai">0</span>
+<button onclick="changeQty('rasmalai',1)">+</button>
+</div>
+</div>
+
 <div class="card">
 <div class="card-top"><span>Birthday Cake</span><span>£25</span></div>
-<div class="desc">Perfect for birthdays.</div>
+<div class="desc">Perfect for birthdays and celebrations.</div>
 <div class="qty">
 <button onclick="changeQty('cake',-1)">-</button>
 <span id="cake">0</span>
@@ -207,42 +275,49 @@ header h1 {
 
 <button class="btn" onclick="showSummary()">Confirm Order</button>
 
+<!-- SUMMARY -->
+<div class="box" id="summaryBox">
+<h3>Order Summary</h3>
+<p id="summaryText"></p>
+<button class="btn" onclick="showForm()">Continue</button>
+</div>
+
+<!-- FORM -->
+<div class="box" id="formBox">
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
+<input id="address" placeholder="Address">
+<input id="miles" placeholder="Distance (miles)">
+<input type="date" id="date">
+
+<select id="time">
+<option>12:00</option>
+<option>14:00</option>
+<option>16:00</option>
+<option>18:00</option>
+<option>20:00</option>
+</select>
+
+<button class="btn" onclick="checkout()">Place Order</button>
+</div>
+
 </div>
 
 <div class="cart">
 Total: £<span id="total">0</span>
 </div>
 
-<!-- STORY MODAL -->
-<div class="modal" id="storyModal">
-<div class="modal-content">
-<h2>Our Story — From Heart to Home</h2>
-
-<p>
-For Ms Trina, cooking has never been just about food — it has always been about care, comfort, and connection.
-<br><br>
-From a young age, she found joy in the kitchen. The sound of spices crackling, the warmth of a home-cooked meal, and the smiles that followed — this is where her passion truly lived.
-<br><br>
-For the past eight years, Ms Trina held onto a quiet dream — to share her food with more people.
-<br><br>
-Today, that dream has finally come to life.
-<br><br>
-<strong>This is not restaurant food.</strong><br>
-This is food made with care, with tradition, and with heart — just like home.
-</p>
-
-<button class="btn" onclick="closeStory()">Close</button>
-</div>
-</div>
-
 <script>
 
-let prices = {biryani:14, akhni:15, cake:25};
+let prices={
+biryani:14,akhni:15,chickenCurry:15,beef:15,
+dal:7,aloo:8,gulab:10,rasmalai:10,cake:25
+};
 
-function changeQty(id, change){
+function changeQty(id,change){
 let el=document.getElementById(id);
 let val=parseInt(el.innerText)+change;
-if(val<0) val=0;
+if(val<0)val=0;
 el.innerText=val;
 updateTotal();
 }
@@ -256,23 +331,32 @@ document.getElementById("total").innerText=total;
 }
 
 function showSummary(){
-alert("Proceeding to order...");
+let total=parseInt(document.getElementById("total").innerText);
+if(total<40){alert("Minimum £40");return;}
+document.getElementById("summaryBox").style.display="block";
 }
 
-function scrollToTop(){
-window.scrollTo({top:0, behavior:'smooth'});
+function showForm(){
+document.getElementById("formBox").style.display="block";
 }
 
-function openStory(){
-document.getElementById("storyModal").style.display="block";
-}
+function checkout(){
 
-function closeStory(){
-document.getElementById("storyModal").style.display="none";
-}
+let total=parseFloat(document.getElementById("total").innerText);
+let miles=parseFloat(document.getElementById("miles").value||0);
+let delivery=miles*1.5;
+let finalTotal=total+delivery;
 
-function showOpening(){
-alert("Open daily 9AM – 9PM\nMinimum 3 hours notice required");
+let date=document.getElementById("date").value;
+let time=document.getElementById("time").value;
+
+let now=new Date();
+let orderTime=new Date(date+"T"+time);
+let diff=(orderTime-now)/(1000*60*60);
+
+if(diff<3){alert("Minimum 3 hours notice required");return;}
+
+window.open("https://wa.me/441726806556?text=Total £"+finalTotal);
 }
 
 </script>

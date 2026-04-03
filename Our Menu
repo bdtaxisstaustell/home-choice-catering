@@ -38,6 +38,17 @@ body {
     color: #c0392b;
 }
 
+/* CATEGORY */
+.category {
+    margin-top: 50px;
+}
+
+.category h2 {
+    color: #c0392b;
+    margin-bottom: 20px;
+}
+
+/* GRID */
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -82,39 +93,90 @@ body {
 <div class="menu">
     <h1>Our Menu</h1>
 
-    <div class="menu-grid">
+    <!-- RICE DISHES -->
+    <div class="category">
+        <h2>Rice Dishes</h2>
+        <div class="menu-grid">
 
-        <div class="card">
-            <h3>Chicken Biryani</h3>
-            <p>Fragrant rice with spiced chicken</p>
-            <p class="price">£8.99</p>
+            <div class="card">
+                <h3>Chicken Biryani</h3>
+                <p class="price">£12</p>
+            </div>
+
+            <div class="card">
+                <h3>Akhni (Yakhni Pulao)</h3>
+                <p class="price">£12</p>
+            </div>
+
+            <div class="card">
+                <h3>Plain Rice</h3>
+                <p class="price">£5</p>
+            </div>
+
         </div>
-
-        <div class="card">
-            <h3>Akhni (Yakhni Pulao)</h3>
-            <p>Light, aromatic rice dish cooked with meat broth</p>
-            <p class="price">£9.49</p>
-        </div>
-
-        <div class="card">
-            <h3>Chicken Curry</h3>
-            <p>Traditional homemade curry</p>
-            <p class="price">£8.99</p>
-        </div>
-
-        <div class="card">
-            <h3>Beef Bhuna</h3>
-            <p>Rich, slow-cooked beef dish</p>
-            <p class="price">£9.99</p>
-        </div>
-
-        <div class="card">
-            <h3>Daal</h3>
-            <p>Comforting lentils cooked at home style</p>
-            <p class="price">£6.99</p>
-        </div>
-
     </div>
+
+    <!-- MAIN DISHES -->
+    <div class="category">
+        <h2>Main Dishes</h2>
+        <div class="menu-grid">
+
+            <div class="card">
+                <h3>Tarkari Chicken</h3>
+            </div>
+
+            <div class="card">
+                <h3>Dal Tadka</h3>
+                <p class="price">£5</p>
+            </div>
+
+            <div class="card">
+                <h3>Dim Bhuna (Egg Curry)</h3>
+                <p class="price">£10</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- STREET / SPECIAL -->
+    <div class="category">
+        <h2>Street & Specials</h2>
+        <div class="menu-grid">
+
+            <div class="card">
+                <h3>Aloo Paratha</h3>
+            </div>
+
+            <div class="card">
+                <h3>Chicken Kathi Roll</h3>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- DESSERT -->
+    <div class="category">
+        <h2>Desserts</h2>
+        <div class="menu-grid">
+
+            <div class="card">
+                <h3>Gulab Jamun</h3>
+                <p class="price">£10</p>
+            </div>
+
+            <div class="card">
+                <h3>Rosmolai</h3>
+                <p class="price">£10</p>
+            </div>
+
+            <div class="card">
+                <h3>Homemade Party Cake</h3>
+                <p class="price">£25</p>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
 <!-- FOOTER -->

@@ -8,22 +8,37 @@
 <style>
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #121212;
-    color: #f1f1f1;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
 }
 
 /* HEADER */
 header {
-    background: #1f1f1f;
-    padding: 25px;
+    background: white;
+    padding: 20px;
     text-align: center;
-    border-bottom: 2px solid #ff6b00;
+    border-bottom: 1px solid #ddd;
 }
 
 header h1 {
     margin: 0;
-    color: #ff6b00;
+    color: #ff5a00;
+}
+
+/* NAV */
+.nav {
+    text-align: center;
+    padding: 10px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
 }
 
 /* HERO */
@@ -32,98 +47,89 @@ header h1 {
     padding: 30px 20px;
 }
 
+.hero h2 {
+    margin-bottom: 10px;
+}
+
 .hero a {
     display: inline-block;
     margin-top: 15px;
-    padding: 12px 18px;
-    background: #ff6b00;
+    padding: 10px 18px;
+    background: #ff5a00;
     color: white;
     border-radius: 6px;
     text-decoration: none;
-    font-weight: bold;
-}
-
-/* BRAND TAG */
-.brand {
-    text-align: center;
-    font-size: 14px;
-    color: #aaa;
-    margin-top: -10px;
 }
 
 /* BANNER */
 .banner {
-    background: #1f1f1f;
-    padding: 18px;
+    background: #fff3e8;
+    padding: 12px;
     text-align: center;
-    line-height: 1.6;
-    border-bottom: 1px solid #333;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
 }
 
-/* URGENCY */
-.urgency {
-    text-align: center;
-    padding: 12px;
-    background: #ff6b00;
-    color: white;
+/* SECTION */
+.container {
+    max-width: 650px;
+    margin: auto;
+    padding: 20px;
+}
+
+.section-title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
     font-weight: bold;
 }
 
-/* CONTAINER */
-.container {
-    padding: 20px;
-    max-width: 600px;
-    margin: auto;
-}
-
-/* MENU */
+/* MENU CARD */
 .card {
-    background: #1f1f1f;
+    background: white;
     border-radius: 10px;
     padding: 15px;
-    margin-bottom: 15px;
-    border: 1px solid #2a2a2a;
+    margin-bottom: 12px;
+    border: 1px solid #eee;
 }
 
 /* QTY */
 .qty {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .qty button {
-    width: 35px;
-    height: 35px;
+    width: 32px;
+    height: 32px;
     border: none;
-    background: #ff6b00;
+    background: #ff5a00;
     color: white;
-    font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .qty span {
-    margin: 0 12px;
+    margin: 0 10px;
 }
 
 /* FORM */
 .form-box {
-    background: #1f1f1f;
-    padding: 20px;
+    background: white;
+    padding: 15px;
     border-radius: 10px;
-    margin-top: 25px;
+    margin-top: 20px;
+    border: 1px solid #eee;
 }
 
 input, select {
     width: 100%;
     padding: 10px;
     margin-top: 8px;
-    margin-bottom: 15px;
-    border: none;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
     border-radius: 6px;
-    background: #2a2a2a;
-    color: white;
 }
 
 /* CART */
@@ -131,20 +137,18 @@ input, select {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: #000;
-    padding: 15px;
+    background: white;
+    padding: 12px;
     text-align: center;
-    border-top: 2px solid #ff6b00;
+    border-top: 1px solid #ddd;
 }
 
 .checkout-btn {
     width: 90%;
     padding: 12px;
-    background: #ff6b00;
+    background: #ff5a00;
     color: white;
     border: none;
-    font-size: 16px;
-    margin-top: 10px;
     border-radius: 6px;
     cursor: pointer;
 }
@@ -153,8 +157,8 @@ input, select {
 footer {
     text-align: center;
     padding: 20px;
-    font-size: 14px;
-    color: #888;
+    font-size: 13px;
+    color: #777;
 }
 </style>
 </head>
@@ -163,37 +167,29 @@ footer {
 
 <header>
     <h1>Home Spice Catering</h1>
-    <p>Homemade Indian Food • Delivery & Event Catering • St Austell</p>
+    <p>Powered by Trina's Kitchen</p>
 </header>
 
-<div class="brand">
-    Powered by <strong>Trina's Kitchen</strong> 🍲
+<div class="nav">
+    <a href="#">Menu</a>
+    <a href="event-catering.html">Book Event Catering</a>
+    <a href="#about">About</a>
+    <a href="#opening">Opening</a>
 </div>
 
 <div class="hero">
-    <h2>Authentic Homemade Food</h2>
-    <p>Traditional Bangladeshi & Indian home-style cooking</p>
-    <a href="event-catering.html">Book Event Catering</a>
+    <h2>Authentic Homemade Bangladeshi & Indian Food</h2>
+    <p>Freshly cooked, delivered or prepared at your event</p>
+    <a href="event-catering.html">Book Catering</a>
 </div>
 
 <div class="banner">
-    Orders must be placed at least <strong>3 hours in advance</strong><br>
-    Open <strong>9:00 AM – 9:00 PM</strong><br><br>
-
-    <strong>Minimum order: £40</strong><br>
-    Delivery: <strong>£1.50 per mile</strong><br>
-    Areas: <strong>PL24, PL25, PL26</strong><br><br>
-
-    This is not restaurant-style food — authentic home cooking by Trina’s Kitchen.
-</div>
-
-<div class="urgency">
-    ⚠️ Limited slots per day — early booking recommended
+    Minimum order £40 • Delivery £1.50/mile • PL24/25/26 • Order 3 hours in advance • Limited slots daily
 </div>
 
 <div class="container">
 
-    <h2>Menu</h2>
+    <div class="section-title">Menu</div>
 
     <div class="card">
         <h3>Lamb Akhni (£14)</h3>
@@ -246,18 +242,31 @@ footer {
     </div>
 
     <div class="form-box">
-        <h2>Customer Details</h2>
+        <div class="section-title">Customer Details</div>
 
         <input id="name" placeholder="Full Name">
         <input id="phone" placeholder="Phone Number">
         <input id="address" placeholder="Delivery Address">
 
         <select id="time">
-            <option value="">Select Delivery Time</option>
+            <option value="">Delivery Time</option>
             <option>ASAP</option>
-            <option>Within 1 Hour</option>
-            <option>Within 2 Hours</option>
+            <option>1 Hour</option>
+            <option>2 Hours</option>
         </select>
+    </div>
+
+    <div id="about" class="form-box">
+        <div class="section-title">About Us</div>
+        <p>
+            Home Spice Catering is a home-based kitchen powered by Trina’s Kitchen, 
+            offering authentic Bangladeshi and Indian home-style cooking — not restaurant food.
+        </p>
+    </div>
+
+    <div id="opening" class="form-box">
+        <div class="section-title">Opening Times</div>
+        <p>9:00 AM – 9:00 PM (Pre-orders only)</p>
     </div>
 
 </div>
@@ -268,7 +277,7 @@ footer {
 </div>
 
 <footer>
-    <p>© 2026 Home Spice Catering • Powered by Trina’s Kitchen</p>
+    <p>© 2026 Home Spice Catering • Trina’s Kitchen</p>
 </footer>
 
 <script>
@@ -306,34 +315,10 @@ function checkout(){
         return;
     }
 
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
-    let address = document.getElementById("address").value;
-    let time = document.getElementById("time").value;
+    let message = "Order from Home Spice Catering\\nTotal: £" + total;
 
-    let order = "";
-
-    for(let item in prices){
-        let qty = document.getElementById(item).innerText;
-        if(qty > 0){
-            order += item + " x" + qty + "\\n";
-        }
-    }
-
-    let message =
-    "Order - Home Spice Catering\\n\\n" +
-    order +
-    "\\nTotal: £" + total +
-    "\\n\\nName: " + name +
-    "\\nPhone: " + phone +
-    "\\nAddress: " + address +
-    "\\nDelivery Time: " + time;
-
-    let businessPhone = "44XXXXXXXXXX";
-
-    let url = "https://wa.me/" + businessPhone + "?text=" + encodeURIComponent(message);
-
-    window.open(url, "_blank");
+    let phone = "44XXXXXXXXXX";
+    window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(message));
 }
 </script>
 

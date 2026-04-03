@@ -18,44 +18,48 @@ body {
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     color: white;
 }
 
-.brand {
-    display: flex;
-    flex-direction: column;
-}
-
-.brand small {
-    font-size: 12px;
+.nav-links a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 /* HERO */
 .hero {
     text-align: center;
-    padding: 100px 20px;
+    padding: 120px 20px;
     background: white;
 }
 
+.hero h2 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #666;
+}
+
 .btn {
-    background-color: #c0392b;
+    background: #c0392b;
     color: white;
-    padding: 12px 22px;
-    text-decoration: none;
+    padding: 14px 25px;
     border-radius: 6px;
+    text-decoration: none;
     cursor: pointer;
 }
 
 /* MENU */
 .menu {
-    padding: 40px 20px;
-    max-width: 800px;
+    display: none;
+    padding: 40px;
+    max-width: 900px;
     margin: auto;
-}
-
-.category {
-    margin-top: 30px;
 }
 
 .category h3 {
@@ -65,28 +69,44 @@ body {
 .menu-item {
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
     background: white;
+    margin: 10px 0;
     padding: 10px;
     border-radius: 6px;
 }
 
-.menu-item button {
-    margin-left: 10px;
+.controls button {
+    margin: 0 3px;
 }
 
 /* CART */
 .cart {
+    margin-top: 30px;
     background: white;
     padding: 20px;
-    margin-top: 30px;
     border-radius: 10px;
 }
 
+/* STORY */
+.story {
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    margin-top: 40px;
+    border-radius: 10px;
+}
+
+.story h2 {
+    text-align: center;
+    color: #c0392b;
+}
+
+/* FOOTER */
 .footer {
+    text-align: center;
     background: #222;
     color: #aaa;
-    text-align: center;
     padding: 20px;
 }
 </style>
@@ -96,17 +116,22 @@ body {
 
 <!-- NAVBAR -->
 <div class="navbar">
-    <div class="brand">
-        <strong>Home Spice Catering</strong>
+    <div>
+        <strong>Home Spice Catering</strong><br>
         <small>Powered by Trina’s Cloud Kitchen</small>
+    </div>
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#story">Our Story</a>
+        <a href="#event">Event Catering</a>
     </div>
 </div>
 
 <!-- HERO -->
 <div class="hero">
-    <h2>Real Homemade Indian & Bangladeshi Food</h2>
-    <p>Not restaurant style — just proper home cooking</p>
-    <a href="#menu" class="btn">Order Now</a>
+    <h2>Authentic Homemade Indian & Bangladeshi Food</h2>
+    <p>Proper home cooking — made with care</p>
+    <button class="btn" onclick="showMenu()">Order Now</button>
 </div>
 
 <!-- MENU -->
@@ -116,23 +141,21 @@ body {
         <h3>Rice & Bowl Meals</h3>
 
         <div class="menu-item">
-            Chicken Biryani – £9.99
-            <button onclick="addToCart('Chicken Biryani',9.99)">Add</button>
+            Chicken Biryani (£9.99)
+            <div class="controls">
+                <button onclick="changeQty('Chicken Biryani',9.99,-1)">-</button>
+                <span id="Chicken Biryani">0</span>
+                <button onclick="changeQty('Chicken Biryani',9.99,1)">+</button>
+            </div>
         </div>
 
         <div class="menu-item">
-            Lamb Akhni – £10.99
-            <button onclick="addToCart('Lamb Akhni',10.99)">Add</button>
-        </div>
-
-        <div class="menu-item">
-            Rajma Chawal – £6.99
-            <button onclick="addToCart('Rajma Chawal',6.99)">Add</button>
-        </div>
-
-        <div class="menu-item">
-            Chole Chawal – £6.99
-            <button onclick="addToCart('Chole Chawal',6.99)">Add</button>
+            Lamb Akhni (£10.99)
+            <div class="controls">
+                <button onclick="changeQty('Lamb Akhni',10.99,-1)">-</button>
+                <span id="Lamb Akhni">0</span>
+                <button onclick="changeQty('Lamb Akhni',10.99,1)">+</button>
+            </div>
         </div>
     </div>
 
@@ -140,37 +163,25 @@ body {
         <h3>Curries</h3>
 
         <div class="menu-item">
-            Butter Chicken – £9.99
-            <button onclick="addToCart('Butter Chicken',9.99)">Add</button>
-        </div>
-
-        <div class="menu-item">
-            Chicken Curry – £8.99
-            <button onclick="addToCart('Chicken Curry',8.99)">Add</button>
-        </div>
-
-        <div class="menu-item">
-            Paneer Butter Masala – £8.99
-            <button onclick="addToCart('Paneer Butter Masala',8.99)">Add</button>
-        </div>
-
-        <div class="menu-item">
-            Egg Curry – £7.99
-            <button onclick="addToCart('Egg Curry',7.99)">Add</button>
+            Butter Chicken (£9.99)
+            <div class="controls">
+                <button onclick="changeQty('Butter Chicken',9.99,-1)">-</button>
+                <span id="Butter Chicken">0</span>
+                <button onclick="changeQty('Butter Chicken',9.99,1)">+</button>
+            </div>
         </div>
     </div>
 
     <div class="category">
-        <h3>Add-ons & Sides</h3>
+        <h3>Add-ons</h3>
 
         <div class="menu-item">
-            Aloo Paratha – £4.99
-            <button onclick="addToCart('Aloo Paratha',4.99)">Add</button>
-        </div>
-
-        <div class="menu-item">
-            Gulab Jamun – £2.99
-            <button onclick="addToCart('Gulab Jamun',2.99)">Add</button>
+            Gulab Jamun (£2.99)
+            <div class="controls">
+                <button onclick="changeQty('Gulab Jamun',2.99,-1)">-</button>
+                <span id="Gulab Jamun">0</span>
+                <button onclick="changeQty('Gulab Jamun',2.99,1)">+</button>
+            </div>
         </div>
     </div>
 
@@ -180,68 +191,96 @@ body {
         <ul id="cartList"></ul>
         <p><strong>Total: £<span id="total">0</span></strong></p>
 
-        <input type="text" id="address" placeholder="Enter delivery address" style="width:100%;padding:10px;margin-top:10px;">
+        <input id="address" placeholder="Enter address" style="width:100%;padding:10px">
 
         <br><br>
-        <button class="btn" onclick="sendWhatsApp()">Send Order via WhatsApp</button>
+        <button class="btn" onclick="sendWhatsApp()">Send via WhatsApp</button>
     </div>
 
 </div>
 
+<!-- STORY -->
+<div id="story" class="story">
+    <h2>Our Story</h2>
+    <p>For Ms Trina, cooking has always been about care and connection...</p>
+</div>
+
+<!-- EVENT -->
+<div id="event" class="story">
+    <h2>Event Catering</h2>
+    <p>Planning an event? Let us handle the food.</p>
+    <button class="btn" onclick="alert('WhatsApp us for bookings!')">Book Now</button>
+</div>
+
 <!-- FOOTER -->
 <div class="footer">
-    <p><strong>Home Spice Catering</strong></p>
+    <p>Home Spice Catering</p>
     <p>Powered by Trina’s Cloud Kitchen</p>
 </div>
 
 <script>
-let cart = [];
-let total = 0;
+let cart = {};
 
-function addToCart(name, price) {
-    cart.push({name, price});
-    total += price;
+function showMenu() {
+    document.getElementById("menu").style.display = "block";
+    window.scrollTo({top: document.getElementById("menu").offsetTop, behavior: 'smooth'});
+}
+
+function changeQty(name, price, delta) {
+    if(!cart[name]) cart[name] = {qty:0, price:price};
+
+    cart[name].qty += delta;
+
+    if(cart[name].qty <= 0) delete cart[name];
+
+    updateDisplay(name);
     updateCart();
+}
+
+function updateDisplay(name) {
+    let el = document.getElementById(name);
+    if(el) el.innerText = cart[name] ? cart[name].qty : 0;
 }
 
 function updateCart() {
     let list = document.getElementById("cartList");
     list.innerHTML = "";
+    let total = 0;
 
-    cart.forEach(item => {
+    for(let item in cart){
         let li = document.createElement("li");
-        li.textContent = item.name + " - £" + item.price.toFixed(2);
+        let cost = cart[item].qty * cart[item].price;
+        total += cost;
+
+        li.innerHTML = `${item} x${cart[item].qty} - £${cost.toFixed(2)}
+        <button onclick="removeItem('${item}')">❌</button>`;
         list.appendChild(li);
-    });
+    }
 
     document.getElementById("total").innerText = total.toFixed(2);
 }
 
-function sendWhatsApp() {
+function removeItem(name){
+    delete cart[name];
+    document.getElementById(name).innerText = 0;
+    updateCart();
+}
+
+function sendWhatsApp(){
     let address = document.getElementById("address").value;
+    let message = "Order:\n";
 
-    if(cart.length === 0){
-        alert("Cart is empty!");
-        return;
+    let total = 0;
+
+    for(let item in cart){
+        let cost = cart[item].qty * cart[item].price;
+        total += cost;
+        message += `${item} x${cart[item].qty} - £${cost.toFixed(2)}\n`;
     }
 
-    if(address === ""){
-        alert("Please enter address");
-        return;
-    }
+    message += `\nTotal: £${total.toFixed(2)}\nAddress: ${address}`;
 
-    let message = "🧾 *Home Spice Catering Order*\n\n";
-
-    cart.forEach(item => {
-        message += item.name + " - £" + item.price.toFixed(2) + "\n";
-    });
-
-    message += "\nTotal: £" + total.toFixed(2);
-    message += "\n\n📍 Address: " + address;
-
-    let url = "https://wa.me/441726806556?text=" + encodeURIComponent(message);
-
-    window.open(url, "_blank");
+    window.open("https://wa.me/441726806556?text=" + encodeURIComponent(message));
 }
 </script>
 

@@ -38,7 +38,7 @@ header {
     border-radius:10px;
 }
 
-input, select {
+input {
     width:100%;
     padding:10px;
     margin:5px 0;
@@ -55,25 +55,14 @@ button {
     font-weight:bold;
 }
 
-.btn {
-    background:#38bdf8;
-}
-
-.btn-danger {
-    background:#ef4444;
-}
-
-.btn-success {
-    background:#22c55e;
-}
+.btn { background:#38bdf8; }
+.btn-danger { background:#ef4444; }
+.btn-success { background:#22c55e; }
+.btn-logout { background:#facc15; color:black; }
 
 .order {
     border-bottom:1px solid #334155;
     padding:10px 0;
-}
-
-.status {
-    font-weight:bold;
 }
 
 .login {
@@ -83,12 +72,20 @@ button {
     padding:20px;
     border-radius:10px;
 }
+
+.msg {
+    margin-top:10px;
+    font-size:14px;
+}
 </style>
 </head>
 
 <body>
 
-<header>🍽 Home Spice Admin Dashboard</header>
+<header>
+🍽 Home Spice Admin Dashboard
+<button class="btn-logout" onclick="logout()" style="float:right;">Logout</button>
+</header>
 
 <!-- LOGIN -->
 <div id="loginBox" class="login">
@@ -96,13 +93,14 @@ button {
 <input id="user" placeholder="Username">
 <input id="pass" type="password" placeholder="Password">
 <button class="btn" onclick="login()">Login</button>
+<p id="loginMsg" class="msg"></p>
 </div>
 
-<!-- MAIN DASHBOARD -->
+<!-- DASHBOARD -->
 <div id="dashboard" style="display:none;">
 <div class="container">
 
-<!-- MENU PANEL -->
+<!-- MENU -->
 <div class="panel">
 
 <div class="box">
@@ -110,6 +108,7 @@ button {
 <input id="itemName" placeholder="Item Name">
 <input id="itemPrice" placeholder="Price">
 <button class="btn" onclick="addItem()">Add Item</button>
+<p id="menuMsg" class="msg"></p>
 </div>
 
 <div class="box">
@@ -119,7 +118,7 @@ button {
 
 </div>
 
-<!-- ORDERS PANEL -->
+<!-- ORDERS -->
 <div class="panel">
 
 <div class="box">
@@ -136,34 +135,50 @@ button {
 
 let token = "";
 
-/* ================= LOGIN ================= */
+/* LOGIN */
 async function login(){
-  const res = await fetch("/login", {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({
-      username: user.value,
-      password: pass.value
-    })
-  });
+  try {
+    const res = await fetch("/login", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        username: user.value,
+        password: pass.value
+      })
+    });
 
-  const data = await res.json();
+    const data = await res.json();
 
-  if(data.token){
-    token = data.token;
-    loginBox.style.display="none";
-    dashboard.style.display="block";
-    loadMenu();
-    loadOrders();
-  } else {
-    alert("Invalid login");
+    if(data.token){
+      token = data.token;
+      loginBox.style.display="none";
+      dashboard.style.display="block";
+      loadMenu();
+      loadOrders();
+    } else {
+      loginMsg.innerText = "❌ Invalid login";
+    }
+  } catch {
+    loginMsg.innerText = "⚠️ Server error";
   }
 }
 
-/* ================= MENU ================= */
+/* LOGOUT */
+function logout(){
+  token = "";
+  dashboard.style.display="none";
+  loginBox.style.display="block";
+}
+
+/* MENU */
 async function loadMenu(){
   const res = await fetch("/menu");
   const items = await res.json();
+
+  if(items.length === 0){
+    menuList.innerHTML = "<li>No items yet</li>";
+    return;
+  }
 
   let html="";
   items.forEach(item=>{
@@ -175,12 +190,12 @@ async function loadMenu(){
     `;
   });
 
-  document.getElementById("menuList").innerHTML = html;
+  menuList.innerHTML = html;
 }
 
 async function addItem(){
   if(!itemName.value || !itemPrice.value){
-    alert("Fill all fields");
+    menuMsg.innerText = "⚠️ Fill all fields";
     return;
   }
 
@@ -196,6 +211,8 @@ async function addItem(){
     })
   });
 
+  menuMsg.innerText = "✅ Item added";
+
   itemName.value="";
   itemPrice.value="";
   loadMenu();
@@ -210,13 +227,20 @@ async function deleteItem(id){
   loadMenu();
 }
 
-/* ================= ORDERS ================= */
+/* ORDERS */
 async function loadOrders(){
+  if(!token) return;
+
   const res = await fetch("/orders", {
     headers:{ Authorization: token }
   });
 
   const data = await res.json();
+
+  if(data.length === 0){
+    orders.innerHTML = "<p>No orders yet</p>";
+    return;
+  }
 
   let html="";
 
@@ -231,7 +255,7 @@ async function loadOrders(){
         `).join("<br>")}
 
         <br><b>Total: £${o.total}</b><br>
-        <span class="status">Status: ${o.status}</span><br>
+        <b>Status: ${o.status}</b><br>
 
         <button class="btn-success" onclick="updateStatus('${o._id}','Accepted')">Accept</button>
         <button class="btn-danger" onclick="updateStatus('${o._id}','Delivered')">Deliver</button>
@@ -239,7 +263,7 @@ async function loadOrders(){
     `;
   });
 
-  document.getElementById("orders").innerHTML = html;
+  orders.innerHTML = html;
 }
 
 async function updateStatus(id, status){
@@ -256,7 +280,9 @@ async function updateStatus(id, status){
 }
 
 /* AUTO REFRESH */
-setInterval(loadOrders, 5000);
+setInterval(() => {
+  if(token) loadOrders();
+}, 5000);
 
 </script>
 

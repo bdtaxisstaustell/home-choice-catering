@@ -207,78 +207,158 @@ input, select {
 <div class="section-title">Main Menu</div>
 
 <!-- ITEMS -->
+
 <div class="card">
-<div class="card-top">
-<span>Chicken Biryani <span class="badge">Popular</span></span>
-<span>£14</span>
-</div>
-<div class="desc">Fragrant basmati rice with tender spiced chicken.</div>
+<div class="card-top"><span>Morning Breakfast</span><span>£9.95</span></div>
+<div class="desc">Hearty breakfast with egg, hash brown, toasted bread, sausage, mushrooms, and grilled tomatoes</div>
 <div class="qty">
-<button onclick="changeQty('biryani',-1)">-</button>
-<span id="biryani">0</span>
-<button onclick="changeQty('biryani',1)">+</button>
+<button onclick="changeQty('breakfast',-1)">-</button>
+<span id="breakfast">0</span>
+<button onclick="changeQty('breakfast',1)">+</button>
+</div>
+</div>
+
+<div class="section-title">Rice</div>
+
+<div class="card">
+<div class="card-top"><span>Traditional Basmati Rice</span><span>£3.50</span></div>
+<div class="desc">Light, fluffy steamed long-grain basmati rice</div>
+<div class="qty">
+<button onclick="changeQty('rice1',-1)">-</button>
+<span id="rice1">0</span>
+<button onclick="changeQty('rice1',1)">+</button>
 </div>
 </div>
 
 <div class="card">
-<div class="card-top">
-<span>Lamb Akhni <span class="badge">Popular</span></span>
-<span>£15</span>
-</div>
-<div class="desc">Aromatic rice dish with slow-cooked lamb.</div>
+<div class="card-top"><span>Home Style Pilau Rice</span><span>£3.95</span></div>
+<div class="desc">Fragrant rice cooked with mild spices and herbs</div>
 <div class="qty">
-<button onclick="changeQty('akhni',-1)">-</button>
-<span id="akhni">0</span>
-<button onclick="changeQty('akhni',1)">+</button>
+<button onclick="changeQty('rice2',-1)">-</button>
+<span id="rice2">0</span>
+<button onclick="changeQty('rice2',1)">+</button>
+</div>
+</div>
+
+<div class="section-title">Main Dishes</div>
+
+<div class="card">
+<div class="card-top"><span>Akhni Chicken</span><span>£10</span></div>
+<div class="desc">Aromatic chicken and rice cooked together with traditional spices</div>
+<div class="qty">
+<button onclick="changeQty('akhniChicken',-1)">-</button>
+<span id="akhniChicken">0</span>
+<button onclick="changeQty('akhniChicken',1)">+</button>
 </div>
 </div>
 
 <div class="card">
-<div class="card-top"><span>Chicken Curry</span><span>£15</span></div>
-<div class="desc">Classic home-style chicken curry.</div>
+<div class="card-top"><span>Lamb Tehari</span><span>£11</span></div>
+<div class="desc">Spiced rice with tender lamb, rich and comforting</div>
 <div class="qty">
-<button onclick="changeQty('chickenCurry',-1)">-</button>
-<span id="chickenCurry">0</span>
-<button onclick="changeQty('chickenCurry',1)">+</button>
+<button onclick="changeQty('tehari',-1)">-</button>
+<span id="tehari">0</span>
+<button onclick="changeQty('tehari',1)">+</button>
 </div>
 </div>
 
 <div class="card">
-<div class="card-top"><span>Beef Curry</span><span>£15</span></div>
-<div class="desc">Rich and hearty beef curry.</div>
+<div class="card-top"><span>Murogh Roast (Drumstick)</span><span>£11</span></div>
+<div class="desc">Marinated chicken drumstick roasted in homestyle spices</div>
 <div class="qty">
-<button onclick="changeQty('beef',-1)">-</button>
-<span id="beef">0</span>
-<button onclick="changeQty('beef',1)">+</button>
+<button onclick="changeQty('roast',-1)">-</button>
+<span id="roast">0</span>
+<button onclick="changeQty('roast',1)">+</button>
 </div>
 </div>
 
 <div class="card">
-<div class="card-top"><span>Dal</span><span>£7</span></div>
-<div class="desc">Comforting lentil curry.</div>
+<div class="card-top"><span>Lamb Rezala</span><span>£11</span></div>
+<div class="desc">Mild, creamy lamb curry with yoghurt and delicate spices</div>
 <div class="qty">
-<button onclick="changeQty('dal',-1)">-</button>
-<span id="dal">0</span>
-<button onclick="changeQty('dal',1)">+</button>
+<button onclick="changeQty('rezala',-1)">-</button>
+<span id="rezala">0</span>
+<button onclick="changeQty('rezala',1)">+</button>
 </div>
 </div>
 
 <div class="card">
-<div class="card-top"><span>Aloo Bhaji</span><span>£8</span></div>
-<div class="desc">Spiced potatoes with herbs.</div>
+<div class="card-top"><span>Aloo Bhuna (Lamb/Chicken)</span><span>£11</span></div>
+<div class="desc">Slow-cooked meat and potatoes in a rich, thick spiced gravy</div>
 <div class="qty">
-<button onclick="changeQty('aloo',-1)">-</button>
-<span id="aloo">0</span>
-<button onclick="changeQty('aloo',1)">+</button>
+<button onclick="changeQty('bhuna',-1)">-</button>
+<span id="bhuna">0</span>
+<button onclick="changeQty('bhuna',1)">+</button>
 </div>
 </div>
 
-<!-- DESSERT -->
-<div class="section-title">Desserts</div>
+<div class="card">
+<div class="card-top"><span>Fish Jhol</span><span>£9</span></div>
+<div class="desc">Light fish curry in a flavourful, spiced broth</div>
+<div class="qty">
+<button onclick="changeQty('fish',-1)">-</button>
+<span id="fish">0</span>
+<button onclick="changeQty('fish',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Dim Bhuna (Egg)</span><span>£9</span></div>
+<div class="desc">Boiled eggs cooked in a thick, spiced onion gravy</div>
+<div class="qty">
+<button onclick="changeQty('egg',-1)">-</button>
+<span id="egg">0</span>
+<button onclick="changeQty('egg',1)">+</button>
+</div>
+</div>
+
+<div class="section-title">Sides & Vegetarian</div>
+
+<div class="card">
+<div class="card-top"><span>Aloo Bhajee</span><span>£4</span></div>
+<div class="desc">Stir-fried potatoes with mild spices</div>
+<div class="qty">
+<button onclick="changeQty('alooSide',-1)">-</button>
+<span id="alooSide">0</span>
+<button onclick="changeQty('alooSide',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Sobji Bhuna</span><span>£7.50</span></div>
+<div class="desc">Mixed vegetables cooked in a rich, spiced sauce</div>
+<div class="qty">
+<button onclick="changeQty('sobji',-1)">-</button>
+<span id="sobji">0</span>
+<button onclick="changeQty('sobji',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Begun Bhaje</span><span>£4</span></div>
+<div class="desc">Lightly spiced fried aubergine slices</div>
+<div class="qty">
+<button onclick="changeQty('begun',-1)">-</button>
+<span id="begun">0</span>
+<button onclick="changeQty('begun',1)">+</button>
+</div>
+</div>
+
+<div class="section-title">Desserts (Pre-order)</div>
+
+<div class="card">
+<div class="card-top"><span>Egg Pudding</span><span>£5</span></div>
+<div class="desc">Smooth and creamy caramel egg dessert</div>
+<div class="qty">
+<button onclick="changeQty('pudding',-1)">-</button>
+<span id="pudding">0</span>
+<button onclick="changeQty('pudding',1)">+</button>
+</div>
+</div>
 
 <div class="card">
 <div class="card-top"><span>Gulab Jamun</span><span>£10</span></div>
-<div class="desc">Soft syrup-soaked milk dumplings.</div>
+<div class="desc">Soft milk dumplings soaked in sweet syrup</div>
 <div class="qty">
 <button onclick="changeQty('gulab',-1)">-</button>
 <span id="gulab">0</span>
@@ -288,7 +368,7 @@ input, select {
 
 <div class="card">
 <div class="card-top"><span>Rasmalai</span><span>£10</span></div>
-<div class="desc">Creamy milk dessert.</div>
+<div class="desc">Soft cheese balls in sweet, creamy milk</div>
 <div class="qty">
 <button onclick="changeQty('rasmalai',-1)">-</button>
 <span id="rasmalai">0</span>
@@ -298,11 +378,63 @@ input, select {
 
 <div class="card">
 <div class="card-top"><span>Birthday Cake</span><span>£25</span></div>
-<div class="desc">Fresh celebration cake for birthdays.</div>
+<div class="desc">Freshly made cake for special occasions</div>
 <div class="qty">
 <button onclick="changeQty('cake',-1)">-</button>
 <span id="cake">0</span>
 <button onclick="changeQty('cake',1)">+</button>
+</div>
+</div>
+
+<div class="section-title">Snacks</div>
+
+<div class="card">
+<div class="card-top"><span>Chicken Samosa</span><span>£3</span></div>
+<div class="desc">Crispy pastry filled with spiced chicken</div>
+<div class="qty">
+<button onclick="changeQty('samosa',-1)">-</button>
+<span id="samosa">0</span>
+<button onclick="changeQty('samosa',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Peyaju</span><span>£3</span></div>
+<div class="desc">Crispy lentil and onion fritters</div>
+<div class="qty">
+<button onclick="changeQty('peyaju',-1)">-</button>
+<span id="peyaju">0</span>
+<button onclick="changeQty('peyaju',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Spring Roll</span><span>£3</span></div>
+<div class="desc">Crunchy rolls filled with vegetables or chicken</div>
+<div class="qty">
+<button onclick="changeQty('spring',-1)">-</button>
+<span id="spring">0</span>
+<button onclick="changeQty('spring',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Murogh Pastry</span><span>£3</span></div>
+<div class="desc">Flaky pastry stuffed with spiced chicken</div>
+<div class="qty">
+<button onclick="changeQty('pastry',-1)">-</button>
+<span id="pastry">0</span>
+<button onclick="changeQty('pastry',1)">+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-top"><span>Paratha</span><span>£1.50</span></div>
+<div class="desc">Soft, layered flatbread with a light crisp</div>
+<div class="qty">
+<button onclick="changeQty('paratha',-1)">-</button>
+<span id="paratha">0</span>
+<button onclick="changeQty('paratha',1)">+</button>
 </div>
 </div>
 

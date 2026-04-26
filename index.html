@@ -626,10 +626,6 @@ Subtotal: £<span id="summaryTotal">0</span>
 
 </div>
 
-<div class="cart">
-Total: £<span id="total">0</span>
-</div>
-
 <script>
 
 let prices = {
@@ -659,17 +655,18 @@ el.innerText=val;
 updateTotal();
 }
 
+let currentTotal = 0;
+
 function updateTotal(){
-let total=0;
+    currentTotal = 0;
 
-for(let i in prices){
-let qty=parseInt(document.getElementById(i).innerText);
-total+=qty*prices[i];
-}
+    for(let i in prices){
+        let qty = parseInt(document.getElementById(i).innerText);
+        currentTotal += qty * prices[i];
+    }
 
-document.getElementById("total").innerText=total.toFixed(2);
-updateCartUI();
-}
+    updateCartUI();
+}    
 
 function updateCartUI(){
 let cartHTML="";
@@ -697,7 +694,7 @@ document.getElementById("totalSide").innerText = total.toFixed(2);
 }
 
 function showSummary(){
-let total=parseFloat(document.getElementById("total").innerText);
+let total = currentTotal;
 
 if(total<20){ alert("Minimum £20"); return; }
 
@@ -750,7 +747,7 @@ if(diff < 3){
 }
 
 // TOTALS
-let total = parseFloat(document.getElementById("total").innerText);
+let total = currentTotal;
 let delivery = miles * 1.5;
 let finalTotal = total + delivery;
 
@@ -791,7 +788,7 @@ function removeItem(id){
     updateTotal();
 }
 function goToCheckout(){
-    let total=parseFloat(document.getElementById("total").innerText);
+    let total = currentTotal;
 
     if(total < 20){
         alert("Minimum £20 order required");

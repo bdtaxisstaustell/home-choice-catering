@@ -199,17 +199,70 @@ input, select {
     font-size: 14px;
     margin-bottom: 8px;
 }
+    
+ /* MOBILE OPTIMISATION + CART FIX */
+@media(max-width:768px){
 
-/* MOBILE FIX */
-@media(max-width:900px){
-    .cart-side{
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        height: auto;
-    }
+/* CART */
+.cart-side{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 140px;
+    overflow-y: auto;
+    border-top: 2px solid #38bdf8;
 }
-</style>
+
+/* prevent content hidden behind cart */
+.container{
+    padding-bottom: 160px;
+}
+
+/* CARD + TEXT */
+.card {
+    padding: 16px;
+}
+
+.card-top {
+    font-size: 18px;
+}
+
+.desc {
+    font-size: 14px;
+}
+
+/* BUTTONS */
+.qty button {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+}
+
+.qty span {
+    font-size: 18px;
+}
+
+.btn {
+    font-size: 18px;
+    padding: 18px;
+}
+
+/* TITLES */
+.section-title {
+    font-size: 22px;
+}
+
+/* CART TEXT CLEAN */
+.cart-item {
+    font-size: 13px;
+}
+
+.cart-side h3 {
+    font-size: 16px;
+}
+
+}   
+    </style>
 </head>
 
 <body>
@@ -631,6 +684,21 @@ function removeItem(id){
     document.getElementById(id).innerText = 0;
     updateTotal();
 }
+function goToCheckout(){
+    let total=parseFloat(document.getElementById("total").innerText);
+
+    if(total < 40){
+        alert("Minimum £40 order required");
+        return;
+    }
+
+    // scroll to summary
+    document.getElementById("summaryBox").style.display="block";
+    window.scrollTo({
+        top: document.getElementById("summaryBox").offsetTop - 20,
+        behavior: "smooth"
+    });
+}
 </script>
     
 <div class="cart-side">
@@ -639,6 +707,7 @@ function removeItem(id){
 <hr>
 <strong>Total: £<span id="totalSide">0</span></strong>
 <button class="btn" onclick="clearCart()">Clear Cart</button>
+<button class="btn" onclick="goToCheckout()">Checkout</button>
 </div>
 </body>
 </html>

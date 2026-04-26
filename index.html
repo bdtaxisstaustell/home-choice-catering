@@ -524,9 +524,19 @@ input, select {
 <button class="btn" onclick="showSummary()">Confirm Order</button>
 
 <div class="box" id="summaryBox">
-<h3>Order Summary</h3>
-<p id="summaryText"></p>
-<button class="btn" onclick="showForm()">Continue</button>
+<h3>🧾 Order Summary</h3>
+
+<div id="summaryText" style="margin-bottom:10px;"></div>
+
+<hr>
+
+<p style="font-size:18px;">
+<strong>Total: £<span id="summaryTotal">0</span></strong>
+</p>
+
+<button class="btn" onclick="showForm()">Continue to Delivery</button>
+<button class="btn" style="background:#dc2626;" onclick="hideSummary()">Back</button>
+
 </div>
 
 <div class="box" id="formBox">
@@ -638,6 +648,7 @@ if(qty>0){ text+=itemNames[i]+" x"+qty+"<br>"; }
 }
 
 document.getElementById("summaryText").innerHTML=text;
+document.getElementById("summaryTotal").innerText = total.toFixed(2);
 document.getElementById("summaryBox").style.display="block";
 }
 
@@ -699,6 +710,11 @@ function goToCheckout(){
         behavior: "smooth"
     });
 }
+
+function hideSummary(){
+    document.getElementById("summaryBox").style.display="none";
+}
+    
 </script>
     
 <div class="cart-side">

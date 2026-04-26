@@ -178,7 +178,37 @@ input, select {
     text-align: center;
     font-size: 16px;
 }
+/* RIGHT SIDE CART */
+.cart-side {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 260px;
+    height: 100%;
+    background: #020617;
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+}
 
+.cart-side h3 {
+    margin-top: 0;
+}
+
+.cart-item {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+/* MOBILE FIX */
+@media(max-width:900px){
+    .cart-side{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: auto;
+    }
+}
 </style>
 </head>
 
@@ -480,16 +510,22 @@ Total: £<span id="total">0</span>
 <script>
 
 let prices = {
-biryani:14, akhni:15, chickenCurry:15, beef:15,
-dal:7, aloo:8, gulab:10, rasmalai:10, cake:25
+breakfast:9.95,
+rice1:3.5, rice2:3.95,
+akhniChicken:10, tehari:11, roast:11, rezala:11, bhuna:11, fish:9, egg:9,
+alooSide:4, sobji:7.5, begun:4,
+pudding:5, gulab:10, rasmalai:10, cake:25,
+samosa:3, peyaju:3, spring:3, pastry:3, paratha:1.5
 };
 
 let itemNames = {
-biryani:"Chicken Biryani", akhni:"Lamb Akhni",
-chickenCurry:"Chicken Curry", beef:"Beef Curry",
-dal:"Dal", aloo:"Aloo Bhaji",
-gulab:"Gulab Jamun", rasmalai:"Rasmalai",
-cake:"Birthday Cake"
+breakfast:"Morning Breakfast",
+rice1:"Basmati Rice", rice2:"Pilau Rice",
+akhniChicken:"Akhni Chicken", tehari:"Lamb Tehari", roast:"Murogh Roast",
+rezala:"Lamb Rezala", bhuna:"Aloo Bhuna", fish:"Fish Jhol", egg:"Dim Bhuna",
+alooSide:"Aloo Bhajee", sobji:"Sobji Bhuna", begun:"Begun Bhaje",
+pudding:"Egg Pudding", gulab:"Gulab Jamun", rasmalai:"Rasmalai", cake:"Cake",
+samosa:"Samosa", peyaju:"Peyaju", spring:"Spring Roll", pastry:"Pastry", paratha:"Paratha"
 };
 
 function changeQty(id, change){
@@ -502,15 +538,38 @@ updateTotal();
 
 function updateTotal(){
 let total=0;
+
 for(let i in prices){
 let qty=parseInt(document.getElementById(i).innerText);
 total+=qty*prices[i];
 }
-document.getElementById("total").innerText=total;
+
+document.getElementById("total").innerText=total.toFixed(2);
+updateCartUI();
+}
+
+function updateCartUI(){
+let cartHTML="";
+let total=0;
+
+for(let i in prices){
+let qty=parseInt(document.getElementById(i).innerText);
+
+if(qty>0){
+let itemTotal = qty * prices[i];
+total += itemTotal;
+
+cartHTML += `<div class="cart-item">${itemNames[i]} x${qty} - £${itemTotal.toFixed(2)}</div>`;
+}
+}
+
+document.getElementById("cartItems").innerHTML = cartHTML || "No items yet";
+document.getElementById("totalSide").innerText = total.toFixed(2);
 }
 
 function showSummary(){
-let total=parseInt(document.getElementById("total").innerText);
+let total=parseFloat(document.getElementById("total").innerText);
+
 if(total<40){ alert("Minimum £40"); return; }
 
 let text="";
@@ -518,6 +577,7 @@ for(let i in itemNames){
 let qty=document.getElementById(i).innerText;
 if(qty>0){ text+=itemNames[i]+" x"+qty+"<br>"; }
 }
+
 document.getElementById("summaryText").innerHTML=text;
 document.getElementById("summaryBox").style.display="block";
 }
@@ -541,12 +601,29 @@ let diff=(orderTime-now)/(1000*60*60);
 
 if(diff<3){ alert("Minimum 3 hours notice required"); return; }
 
-let msg="🍛 Order\nTotal: £"+finalTotal.toFixed(2)+"\nDate:"+date+" "+time;
+let msg="🍛 Order\n";
+
+for(let i in itemNames){
+let qty=document.getElementById(i).innerText;
+if(qty>0){
+msg += itemNames[i]+" x"+qty+"\n";
+}
+}
+
+msg += "\nTotal: £"+finalTotal.toFixed(2)+"\nDate:"+date+" "+time;
 
 window.open("https://wa.me/441726806556?text="+encodeURIComponent(msg));
 }
 
 </script>
 
+
+    
+<div class="cart-side">
+<h3>🛒 Your Order</h3>
+<div id="cartItems">No items yet</div>
+<hr>
+<strong>Total: £<span id="totalSide">0</span></strong>
+</div>
 </body>
 </html>

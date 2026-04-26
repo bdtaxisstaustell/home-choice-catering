@@ -213,7 +213,7 @@ input, select {
     right: 0;
 
     width: 100%;
-    height: 65vh;
+    height: 55vh;
 
     background: #020617;
     color: white;
@@ -224,7 +224,7 @@ input, select {
     border-radius: 16px 16px 0 0;
     box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
 
-    transform: translateY(85%);
+    transform: translateY(calc(100% - 90px));
     transition: transform 0.3s ease;
     z-index: 999; /* keeps it above but controlled */
 }
@@ -844,12 +844,19 @@ function goToCheckout(){
         return;
     }
 
+    // close mobile cart first
+    document.querySelector(".cart-side").classList.remove("cart-open");
+
+    // show summary
+    document.getElementById("summaryBox").style.display = "block";
+
     // scroll to summary
-    document.getElementById("summaryBox").style.display="block";
-    window.scrollTo({
-        top: document.getElementById("summaryBox").offsetTop - 20,
-        behavior: "smooth"
-    });
+    setTimeout(() => {
+        window.scrollTo({
+            top: document.getElementById("summaryBox").offsetTop - 20,
+            behavior: "smooth"
+        });
+    }, 300);
 }
 
 function hideSummary(){

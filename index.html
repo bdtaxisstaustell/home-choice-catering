@@ -671,16 +671,35 @@ let diff=(orderTime-now)/(1000*60*60);
 
 if(diff<3){ alert("Minimum 3 hours notice required"); return; }
 
-let msg="🍛 Order\n";
+let msg = "🍛 *Home Spice Catering Order*\n\n";
+
+// items
+msg += "🧾 *Items:*\n";
 
 for(let i in itemNames){
-let qty=document.getElementById(i).innerText;
-if(qty>0){
-msg += itemNames[i]+" x"+qty+"\n";
+let qty = document.getElementById(i).innerText;
+if(qty > 0){
+msg += "• " + itemNames[i] + " x" + qty + "\n";
 }
 }
 
-msg += "\nTotal: £"+finalTotal.toFixed(2)+"\nDate:"+date+" "+time;
+// totals
+msg += "\n💰 *Subtotal:* £" + total.toFixed(2);
+msg += "\n🚚 *Delivery:* £" + delivery.toFixed(2);
+msg += "\n✅ *Final Total:* £" + finalTotal.toFixed(2);
+
+// delivery details
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let address = document.getElementById("address").value;
+
+msg += "\n\n📍 *Delivery Details:*";
+msg += "\n👤 Name: " + name;
+msg += "\n📞 Phone: " + phone;
+msg += "\n🏠 Address: " + address;
+
+// date & time
+msg += "\n\n📅 *Delivery Time:* " + date + " " + time;
 
 window.open("https://wa.me/441726806556?text="+encodeURIComponent(msg));
 }

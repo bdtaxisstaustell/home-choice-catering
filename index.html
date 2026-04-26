@@ -559,7 +559,13 @@ if(qty>0){
 let itemTotal = qty * prices[i];
 total += itemTotal;
 
-cartHTML += `<div class="cart-item">${itemNames[i]} x${qty} - £${itemTotal.toFixed(2)}</div>`;
+cartHTML += `
+<div class="cart-item">
+${itemNames[i]} x${qty} - £${itemTotal.toFixed(2)}
+<button onclick="removeItem('${i}')" style="margin-left:10px;background:red;color:white;border:none;padding:2px 6px;border-radius:4px;">✕</button>
+</div>
+`;
+    
 }
 }
 
@@ -615,15 +621,24 @@ msg += "\nTotal: £"+finalTotal.toFixed(2)+"\nDate:"+date+" "+time;
 window.open("https://wa.me/441726806556?text="+encodeURIComponent(msg));
 }
 
+    function clearCart(){
+    for(let i in prices){
+        document.getElementById(i).innerText = 0;
+    }
+    updateTotal();
+}
+function removeItem(id){
+    document.getElementById(id).innerText = 0;
+    updateTotal();
+}
 </script>
-
-
     
 <div class="cart-side">
 <h3>🛒 Your Order</h3>
 <div id="cartItems">No items yet</div>
 <hr>
 <strong>Total: £<span id="totalSide">0</span></strong>
+<button class="btn" onclick="clearCart()">Clear Cart</button>
 </div>
 </body>
 </html>

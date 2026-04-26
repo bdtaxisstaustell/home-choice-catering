@@ -735,8 +735,8 @@ x${qty} — £${itemTotal.toFixed(2)}
 
 document.getElementById("cartItems").innerHTML = cartHTML || "No items yet";
 document.getElementById("totalSide").innerText = total.toFixed(2);
-if(total > 0){
-    document.querySelector(".cart-side").classList.add("cart-open");
+if(total === 0){
+    document.querySelector(".cart-side").classList.remove("cart-open");
 }
 }
 

@@ -699,7 +699,7 @@ document.getElementById("totalSide").innerText = total.toFixed(2);
 function showSummary(){
 let total=parseFloat(document.getElementById("total").innerText);
 
-if(total<40){ alert("Minimum £40"); return; }
+if(total<20){ alert("Minimum £20"); return; }
 
 let text="";
 for(let i in itemNames){
@@ -793,8 +793,8 @@ function removeItem(id){
 function goToCheckout(){
     let total=parseFloat(document.getElementById("total").innerText);
 
-    if(total < 40){
-        alert("Minimum £40 order required");
+    if(total < 20){
+        alert("Minimum £20 order required");
         return;
     }
 

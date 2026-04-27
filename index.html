@@ -878,8 +878,41 @@ function hideSummary(){
 }
 
 function toggleCart(){
-    document.querySelector(".cart-side").classList.toggle("cart-open");
-}    
+    const cart = document.querySelector(".cart-side");
+
+    if(cart.classList.contains("cart-open")){
+        cart.classList.remove("cart-open");
+    } else {
+        cart.classList.add("cart-open");
+    }
+}
+
+let startY = 0;
+let endY = 0;
+
+const cart = document.querySelector(".cart-side");
+
+cart.addEventListener("touchstart", e => {
+    startY = e.touches[0].clientY;
+});
+
+cart.addEventListener("touchmove", e => {
+    endY = e.touches[0].clientY;
+});
+
+cart.addEventListener("touchend", () => {
+    let diff = endY - startY;
+
+    // swipe down → close
+    if(diff > 60){
+        cart.classList.remove("cart-open");
+    }
+
+    // swipe up → open
+    if(diff < -60){
+        cart.classList.add("cart-open");
+    }
+});  
     
 </script>
     
@@ -887,7 +920,7 @@ function toggleCart(){
 
 <!-- ADD THIS BLOCK -->
 
-<div onclick="toggleCart()" style="text-align:center; cursor:pointer; margin-bottom:10px;">
+<div onclick="toggleCart()" style="text-align:center; cursor:pointer; margin-bottom:10px; padding:10px;">
     <div style="width:40px;height:5px;background:#64748b;margin:auto;border-radius:10px;"></div>
     <div style="font-size:12px;margin-top:6px;">Click here for cart</div>
 </div>    

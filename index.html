@@ -889,35 +889,58 @@ function toggleCart(){
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    const cart = document.querySelector(".cart-side");
+    const handle = document.getElementById("cartHandle");
+
     let startY = 0;
-    let endY = 0;
+    let currentY = 0;
+    let isDragging = false;
 
-   const cart = document.querySelector(".cart-side");
-const handle = document.getElementById("cartHandle");
-
-    handle.addEventListener("touchstart", e => {
+    handle.addEventListener("touchstart", (e) => {
         startY = e.touches[0].clientY;
+        isDragging = true;
+        cart.style.transition = "none"; // disable animation while dragging
     });
 
-    cart.addEventListener("touchmove", e => {
-        endY = e.touches[0].clientY;
-    });
+    handle.addEventListener("touchmove", (e) => {
+        if(!isDragging) return;
 
-    cart.addEventListener("touchend", () => {
-        let diff = endY - startY;
+        currentY = e.touches[0].clientY;
+        let diff = currentY - startY;
 
-        // swipe down → close
-        if(diff > 60){
-            cart.classList.remove("cart-open");
+        // if cart is open, allow drag down
+        if(cart.classList.contains("cart-open")){
+            if(diff > 0){
+                cart.style.transform = `translateY(${diff}px)`;
+            }
+        } 
+        // if cart is closed, allow drag up
+        else {
+            if(diff < 0){
+                cart.style.transform = `translateY(calc(100% - 90px + ${diff}px))`;
+            }
         }
+    });
 
-        // swipe up → open
+    handle.addEventListener("touchend", () => {
+        isDragging = false;
+        cart.style.transition = "transform 0.3s ease";
+
+        let diff = currentY - startY;
+
+        // threshold to decide open/close
         if(diff < -60){
-            cart.classList.add("cart-open");
+            cart.classList.add("cart-open"); // open
+        } else if(diff > 60){
+            cart.classList.remove("cart-open"); // close
         }
+
+        // reset inline transform
+        cart.style.transform = "";
     });
 
-});
+});    
+
     
 </script>
     

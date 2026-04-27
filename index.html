@@ -887,32 +887,36 @@ function toggleCart(){
     }
 }
 
-let startY = 0;
-let endY = 0;
+document.addEventListener("DOMContentLoaded", () => {
 
-const cart = document.querySelector(".cart-side");
+    let startY = 0;
+    let endY = 0;
 
-cart.addEventListener("touchstart", e => {
-    startY = e.touches[0].clientY;
+    const cart = document.querySelector(".cart-side");
+
+    cart.addEventListener("touchstart", e => {
+        startY = e.touches[0].clientY;
+    });
+
+    cart.addEventListener("touchmove", e => {
+        endY = e.touches[0].clientY;
+    });
+
+    cart.addEventListener("touchend", () => {
+        let diff = endY - startY;
+
+        // swipe down → close
+        if(diff > 60){
+            cart.classList.remove("cart-open");
+        }
+
+        // swipe up → open
+        if(diff < -60){
+            cart.classList.add("cart-open");
+        }
+    });
+
 });
-
-cart.addEventListener("touchmove", e => {
-    endY = e.touches[0].clientY;
-});
-
-cart.addEventListener("touchend", () => {
-    let diff = endY - startY;
-
-    // swipe down → close
-    if(diff > 60){
-        cart.classList.remove("cart-open");
-    }
-
-    // swipe up → open
-    if(diff < -60){
-        cart.classList.add("cart-open");
-    }
-});  
     
 </script>
     

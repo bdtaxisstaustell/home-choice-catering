@@ -756,10 +756,24 @@ for(let i in itemNames){
 document.getElementById("summaryText").innerHTML=text;
 document.getElementById("summaryTotal").innerText = total.toFixed(2);
 document.getElementById("summaryBox").style.display="block";
+
+setTimeout(() => {
+    document.getElementById("summaryBox").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}, 200);
 }
 
 function showForm(){
-document.getElementById("formBox").style.display="block";
+    document.getElementById("formBox").style.display="block";
+
+    setTimeout(() => {
+        document.getElementById("formBox").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }, 200);
 }
 
     function checkout(){

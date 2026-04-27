@@ -892,9 +892,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let startY = 0;
     let endY = 0;
 
-    const cart = document.querySelector(".cart-side");
+   const cart = document.querySelector(".cart-side");
+const handle = document.getElementById("cartHandle");
 
-    cart.addEventListener("touchstart", e => {
+    handle.addEventListener("touchstart", e => {
         startY = e.touches[0].clientY;
     });
 
@@ -924,7 +925,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <!-- ADD THIS BLOCK -->
 
-<div onclick="toggleCart()" style="text-align:center; cursor:pointer; margin-bottom:10px; padding:10px;">
+<div id="cartHandle" onclick="toggleCart()" style="text-align:center; cursor:pointer; margin-bottom:10px; padding:10px;">
     <div style="width:40px;height:5px;background:#64748b;margin:auto;border-radius:10px;"></div>
     <div style="font-size:12px;margin-top:6px;">Click here for cart</div>
 </div>    

@@ -343,7 +343,25 @@ input, select {
 
 .cart-actions .btn{
     flex: 1;
-}    
+}
+
+#overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 998;
+}
+
+#overlay.show{
+    opacity: 1;
+    pointer-events: auto;
+}
 </style>
 </head>
 
@@ -736,7 +754,11 @@ x${qty} — £${itemTotal.toFixed(2)}
 document.getElementById("cartItems").innerHTML = cartHTML || "No items yet";
 document.getElementById("totalSide").innerText = total.toFixed(2);
 if(total === 0){
-    document.querySelector(".cart-side").classList.remove("cart-open");
+const cart = document.querySelector(".cart-side");
+const overlay = document.getElementById("overlay");
+
+cart.classList.remove("cart-open");
+overlay.classList.remove("show");
 }
 }
 
@@ -879,11 +901,14 @@ function hideSummary(){
 
 function toggleCart(){
     const cart = document.querySelector(".cart-side");
+    const overlay = document.getElementById("overlay");
 
     if(cart.classList.contains("cart-open")){
         cart.classList.remove("cart-open");
+        overlay.classList.remove("show");
     } else {
         cart.classList.add("cart-open");
+        overlay.classList.add("show");
     }
 }
 
@@ -902,6 +927,14 @@ document.addEventListener("DOMContentLoaded", () => {
         cart.style.transition = "none"; // disable animation while dragging
     });
 
+  /* ✅ OUTSIDE — clean */
+document.getElementById("overlay").addEventListener("click", () => {
+    const cart = document.querySelector(".cart-side");
+    const overlay = document.getElementById("overlay");
+
+    cart.classList.remove("cart-open");
+    overlay.classList.remove("show");
+});  
     handle.addEventListener("touchmove", (e) => {
         if(!isDragging) return;
 
@@ -929,11 +962,17 @@ document.addEventListener("DOMContentLoaded", () => {
         let diff = currentY - startY;
 
         // threshold to decide open/close
-        if(diff < -60){
-            cart.classList.add("cart-open"); // open
-        } else if(diff > 60){
-            cart.classList.remove("cart-open"); // close
-        }
+
+        const overlay = document.getElementById("overlay");
+
+if(diff < -60){
+    cart.classList.add("cart-open");
+    overlay.classList.add("show");
+} 
+else if(diff > 60){
+    cart.classList.remove("cart-open");
+    overlay.classList.remove("show");
+}
 
         // reset inline transform
         cart.style.transform = "";
@@ -943,7 +982,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     
 </script>
-    
+<div id="overlay"></div>
 <div class="cart-side">
 
 <!-- ADD THIS BLOCK -->

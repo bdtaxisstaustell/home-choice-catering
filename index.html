@@ -881,7 +881,11 @@ function goToCheckout(){
     }
 
     // close mobile cart first
-    document.querySelector(".cart-side").classList.remove("cart-open");
+   const cart = document.querySelector(".cart-side");
+const overlay = document.getElementById("overlay");
+
+cart.classList.remove("cart-open");
+overlay.classList.remove("show");
 
     // show summary
     document.getElementById("summaryBox").style.display = "block";
@@ -927,14 +931,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cart.style.transition = "none"; // disable animation while dragging
     });
 
-  /* ✅ OUTSIDE — clean */
-document.getElementById("overlay").addEventListener("click", () => {
-    const cart = document.querySelector(".cart-side");
-    const overlay = document.getElementById("overlay");
-
-    cart.classList.remove("cart-open");
-    overlay.classList.remove("show");
-});  
+   
     handle.addEventListener("touchmove", (e) => {
         if(!isDragging) return;
 
@@ -954,6 +951,14 @@ document.getElementById("overlay").addEventListener("click", () => {
             }
         }
     });
+    /* ✅ NOW truly outside */
+document.getElementById("overlay").addEventListener("click", () => {
+    const cart = document.querySelector(".cart-side");
+    const overlay = document.getElementById("overlay");
+
+    cart.classList.remove("cart-open");
+    overlay.classList.remove("show");
+});
 
     handle.addEventListener("touchend", () => {
         isDragging = false;

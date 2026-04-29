@@ -886,7 +886,6 @@ if(!phoneRegex.test(phone)){
 let now = new Date();
 let orderTime = new Date(date + "T" + time);
 
-// ❗ NEW FIX (add this block here)
 if(orderTime < now){
     errorBox.innerText = "Select a future time";
 
@@ -1129,12 +1128,11 @@ if(selected){
     });
 });   
 
-    
+
 </script>
 <div id="overlay"></div>
 <div class="cart-side">
 
-<!-- ADD THIS BLOCK -->
 
 <div id="cartHandle" onclick="toggleCart()" style="text-align:center; cursor:pointer; margin-bottom:10px; padding:10px;">
     <div style="width:40px;height:5px;background:#64748b;margin:auto;border-radius:10px;"></div>

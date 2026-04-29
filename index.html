@@ -1118,13 +1118,36 @@ function updateTimeSlots(){
         return;
     }
 
-    // 🔥 BUILD TIME SLOTS (every 15 mins)
     let current = new Date();
 
     if(selectedDate === today){
-        current = new Date(now);
-        hint.innerText = "Earliest delivery today (2.5h notice applied)";
+
+        // 🔥 KEY LOGIC (THIS IS WHAT YOU WANTED)
+        let opening = new Date();
+        opening.setHours(9, 0, 0, 0);
+
+        // choose later of:
+        // - 09:00
+        // - now + 2.5h
+        let baseTime = new Date(Math.max(opening.getTime(), now.getTime()));
+
+// ✅ ROUND UP to next 15 minutes
+let minutes = baseTime.getMinutes();
+let remainder = minutes % 15;
+
+if(remainder !== 0){
+    baseTime.setMinutes(minutes + (15 - remainder));
+}
+
+baseTime.setSeconds(0);
+baseTime.setMilliseconds(0);
+
+current = baseTime;
+
+        hint.innerText = "Earliest delivery today (after 09:00 + 2.5h notice)";
+
     } else {
+
         current.setHours(startHour, 0, 0, 0);
         hint.innerText = "Delivery hours: 09:00 – 21:00";
     }
@@ -1132,8 +1155,7 @@ function updateTimeSlots(){
     let end = new Date();
     end.setHours(endHour, 0, 0, 0);
 
-    slots = [];
-
+    // 🔥 BUILD SLOTS (15 mins)
     while(current < end){
         let h = String(current.getHours()).padStart(2, '0');
         let m = String(current.getMinutes()).padStart(2, '0');
@@ -1142,7 +1164,9 @@ function updateTimeSlots(){
 
         current.setMinutes(current.getMinutes() + 15);
     }
-    slots.unshift("ASAP (earliest available)");
+
+    // ✅ ASAP FIRST
+    slots.unshift(`ASAP (${slots[1]})`);
 
     // 🔁 UPDATE DROPDOWN
     timeSelect.innerHTML = "";

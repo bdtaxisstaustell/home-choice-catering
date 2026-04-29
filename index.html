@@ -1073,8 +1073,71 @@ else if(diff > 60){
         cart.style.transform = "";
     });
     }); 
+function updateTimeSlots(){
 
-/* ✅ NOW truly outside */
+    let selectedDate = document.getElementById("date").value;
+    let today = new Date().toISOString().split("T")[0];
+
+    let timeSelect = document.getElementById("time");
+    let options = timeSelect.options;
+
+    let selected = "";
+
+    if(selectedDate === today){
+
+        let now = new Date();
+        now.setMinutes(now.getMinutes() + 150); // 2.5h
+
+        for(let i = 0; i < options.length; i++){
+            let opt = options[i];
+            if(!opt.value) continue;
+
+            let [h,m] = opt.value.split(":").map(Number);
+
+            let slotTime = new Date();
+            slotTime.setHours(h, m, 0, 0);
+
+            if(slotTime < now){
+                opt.disabled = true;
+            } else {
+                opt.disabled = false;
+                if(!selected) selected = opt.value;
+            }
+        }
+
+    } else {
+        // future date = enable all
+        for(let opt of options){
+            if(opt.value){
+                opt.disabled = false;
+            }
+        }
+        for(let opt of options){
+    if(opt.value){
+        selected = opt.value;
+        break;
+    }
+    }
+    }
+
+// if no valid time today → switch to tomorrow
+if(!selected && selectedDate === today){
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    let tomorrowStr = tomorrow.toISOString().split("T")[0];
+
+    document.getElementById("date").value = tomorrowStr;
+
+    updateTimeSlots();
+    return;
+}
+ 
+    if(selected){
+        timeSelect.value = selected;
+    }
+}
+
 
 window.addEventListener("load", () => {
     loadCart();
@@ -1082,43 +1145,9 @@ let today = new Date().toISOString().split("T")[0];
 document.getElementById("date").value = today;
 document.getElementById("date").setAttribute("min", today);
 
-// ⏱ smart time control (2.5 hour rule)
-let now = new Date();
-now.setMinutes(now.getMinutes() + 150); // 2.5 hours
+updateTimeSlots();
 
-let timeSelect = document.getElementById("time");
-let options = timeSelect.options;
-
-let selected = "";
-
-for(let i = 0; i < options.length; i++){
-    let opt = options[i];
-
-    if(!opt.value) continue; // skip "Select time"
-
-    let [h,m] = opt.value.split(":").map(Number);
-
-    let slotTime = new Date();
-    slotTime.setHours(h, m, 0, 0);
-
-    // ❌ disable if too early
-    if(slotTime < now){
-        opt.disabled = true;
-    } else {
-        opt.disabled = false;
-
-        // pick first valid slot
-        if(!selected){
-            selected = opt.value;
-        }
-    }
-}
-
-// auto-select first valid slot
-if(selected){
-    timeSelect.value = selected;
-}
-
+document.getElementById("date").addEventListener("change", updateTimeSlots);
     const overlay = document.getElementById("overlay");
     overlay.addEventListener("click", () => {
     const cart = document.querySelector(".cart-side");

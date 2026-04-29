@@ -711,7 +711,17 @@ function changeQty(id, change){
 
     if(val < 0) val = 0;
     el.innerText = val;
+// 🔥 highlight card when adding
+if(change > 0){
+    const card = document.getElementById("card-" + id);
+    if(card){
+        card.classList.add("flash");
 
+        setTimeout(() => {
+            card.classList.remove("flash");
+        }, 400);
+    }
+}
     // 🔥 NEW: open cart when item added
     if(change > 0){
         const cart = document.querySelector(".cart-side");

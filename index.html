@@ -977,14 +977,17 @@ else if(diff > 60){
     }); 
 
 /* ✅ NOW truly outside */
-document.getElementById("overlay").addEventListener("click", () => {
-    const cart = document.querySelector(".cart-side");
+
+window.addEventListener("load", () => {
     const overlay = document.getElementById("overlay");
 
-    cart.classList.remove("cart-open");
-    overlay.classList.remove("show");
-});
-   
+    overlay.addEventListener("click", () => {
+        const cart = document.querySelector(".cart-side");
+
+        cart.classList.remove("cart-open");
+        overlay.classList.remove("show");
+    });
+});   
 
     
 </script>

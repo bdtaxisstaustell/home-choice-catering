@@ -708,6 +708,7 @@ input, select {
 
 <div class="form-group">
 <label>Delivery Time *</label>
+
 <select id="time">
 <option value="">Select time</option>
 <option>12:00</option>
@@ -716,6 +717,9 @@ input, select {
 <option>18:00</option>
 <option>20:00</option>
 </select>
+
+<div id="deliveryHint" style="font-size:13px;color:#64748b;"></div>
+
 </div>
 
 <div id="formError" class="form-error"></div>
@@ -1083,59 +1087,53 @@ function updateTimeSlots(){
 
     let selected = "";
 
-    if(selectedDate === today){
+if(selectedDate === today){
 
-        let now = new Date();
-        now.setMinutes(now.getMinutes() + 150); // 2.5h
+    let now = new Date();
+    now.setMinutes(now.getMinutes() + 150); // 2.5h
 
-        for(let i = 0; i < options.length; i++){
-            let opt = options[i];
-            if(!opt.value) continue;
+    let hasValid = false;
 
-            let [h,m] = opt.value.split(":").map(Number);
+    for(let i = 0; i < options.length; i++){
+        let opt = options[i];
+        if(!opt.value) continue;
 
-            let slotTime = new Date();
-            slotTime.setHours(h, m, 0, 0);
+        let [h,m] = opt.value.split(":").map(Number);
 
-            if(slotTime < now){
-                opt.disabled = true;
-            } else {
-                opt.disabled = false;
-                if(!selected) selected = opt.value;
+        let slotTime = new Date();
+        slotTime.setHours(h, m, 0, 0);
+
+        if(slotTime < now){
+            opt.disabled = true;
+        } else {
+            opt.disabled = false;
+            hasValid = true;
+
+            if(!selected){
+                selected = opt.value;
             }
         }
-
-    } else {
-        // future date = enable all
-        for(let opt of options){
-            if(opt.value){
-                opt.disabled = false;
-            }
-        }
-        for(let opt of options){
-    if(opt.value){
-        selected = opt.value;
-        break;
-    }
-    }
     }
 
-// if no valid time today → switch to tomorrow
-if(!selected && selectedDate === today){
-    let tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
+    // 🔥 KEY FIX
+    if(!hasValid){
+        let tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
 
-    let tomorrowStr = tomorrow.toISOString().split("T")[0];
+        let tomorrowStr = tomorrow.toISOString().split("T")[0];
 
-    document.getElementById("date").value = tomorrowStr;
+        document.getElementById("date").value = tomorrowStr;
 
-    updateTimeSlots();
-    return;
+        updateTimeSlots();
+        return;
+    }
 }
  
     if(selected){
         timeSelect.value = selected;
     }
+    document.getElementById("deliveryHint").innerText =
+    "Earliest delivery slot selected automatically";
 }
 
 

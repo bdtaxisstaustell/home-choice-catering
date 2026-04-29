@@ -90,7 +90,7 @@ header h1 {
 /* CARD */
 .card {
     background: white;
-    padding: 20px;
+    padding: 16px;
     border-radius: 12px;
     margin-bottom: 15px;
 }
@@ -241,9 +241,7 @@ input, select {
 }
     
 /* CARD + TEXT */
-.card {
-    padding: 16px;
-}
+
 
 .card-top {
     font-size: 18px;
@@ -749,16 +747,7 @@ overlay.classList.remove("show");
 }
 
 
-function showForm(){
-    document.getElementById("formBox").style.display="block";
 
-    setTimeout(() => {
-        document.getElementById("formBox").scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-    }, 200);
-}
 
     function checkout(){
 
@@ -778,14 +767,21 @@ if(!name || !phone || !address || !date || !time){
     return;
 }
 
-if(phone.length < 10){
-    errorBox.innerText = "Enter a valid phone number";
+let phoneRegex = /^07\d{9}$/;
+if(!phoneRegex.test(phone)){
+    errorBox.innerText = "Enter a valid UK phone number";
     return;
 }
-
 // TIME CHECK
 let now = new Date();
 let orderTime = new Date(date + "T" + time);
+
+// ❗ NEW FIX (add this block here)
+if(orderTime < now){
+    errorBox.innerText = "Select a future time";
+    return;
+}
+
 let diff = (orderTime - now) / (1000 * 60 * 60);
 
 if(diff < 3){

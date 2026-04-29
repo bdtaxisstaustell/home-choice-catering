@@ -934,10 +934,15 @@ msg += "\n🏠 Address: " + address;
 msg += "\n\n📅 *Delivery Time:* " + date + " " + time;
 
 if(!confirm("Confirm order and open WhatsApp?")){
+    btn.innerText = "Place Order";
+    btn.disabled = false;
     return;
 }
+
 localStorage.setItem("lastOrder", msg);
 window.open("https://wa.me/441726983441?text=" + encodeURIComponent(msg));
+btn.innerText = "Place Order";
+btn.disabled = false;
 alert("Order opened in WhatsApp. Please press SEND to confirm your order.");
 }
 

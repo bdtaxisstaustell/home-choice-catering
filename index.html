@@ -1087,7 +1087,10 @@ function updateTimeSlots(){
 
     if(selectedDate === today){
         timeInput.min = minTime;
-        timeInput.value = minTime;
+
+        if(!timeInput.value || timeInput.value < minTime){
+    timeInput.value = minTime;
+}
 
         document.getElementById("deliveryHint").innerText =
             "Earliest delivery today: " + minTime;
@@ -1107,21 +1110,6 @@ window.addEventListener("load", () => {
     document.getElementById("date").value = today;
     document.getElementById("date").setAttribute("min", today);
     updateTimeSlots();
-
-    let now = new Date();
-    now.setMinutes(now.getMinutes() + 150); // 2.5 hours
-
-    let hours = String(now.getHours()).padStart(2, '0');
-    let minutes = String(now.getMinutes()).padStart(2, '0');
-
-    let minTime = `${hours}:${minutes}`;
-
-    let timeInput = document.getElementById("time");
-    timeInput.min = minTime;
-    timeInput.value = minTime;
-
-    document.getElementById("deliveryHint").innerText =
-        "Earliest delivery time: " + minTime;
 
     const overlay = document.getElementById("overlay");
     overlay.addEventListener("click", () => {

@@ -855,20 +855,47 @@ let address = document.getElementById("address").value.trim();
 let miles = parseFloat(document.getElementById("miles").value || 0);
 let date = document.getElementById("date").value;
 let time = document.getElementById("time").value;
-if(time.includes("ASAP")){
-    time = "ASAP (auto scheduled)";
+// 🔥 HANDLE ASAP FIRST
+let isASAP = time.includes("ASAP");
+
+let now = new Date();
+let orderTime;
+
+if(isASAP){
+
+    let asap = new Date();
+    asap.setMinutes(asap.getMinutes() + 150); // 2.5h
+
+    // round to next 15 mins
+    let m = asap.getMinutes();
+    let r = m % 15;
+
+    if(r !== 0){
+        asap.setMinutes(m + (15 - r));
+    }
+
+    asap.setSeconds(0);
+    asap.setMilliseconds(0);
+
+    orderTime = asap;
+
+    // convert for message
+    time = orderTime.toTimeString().slice(0,5);
+
+} else {
+    orderTime = new Date(date + "T" + time);
 }
 
+
+// 🔥 VALIDATION STARTS HERE
 let errorBox = document.getElementById("formError");
 errorBox.innerText = "";
 
-// VALIDATION
 if(!name || !phone || !address || !date || !time){
     errorBox.innerText = "Please fill all required fields (*)";
 
     btn.innerText = "Place Order";
     btn.disabled = false;
-
     return;
 }
 
@@ -878,24 +905,25 @@ if(!phoneRegex.test(phone)){
 
     btn.innerText = "Place Order";
     btn.disabled = false;
-
     return;
 }
-// TIME CHECK
-let now = new Date();
-let orderTime = new Date(date + "T" + time);
 
+// 🔥 TIME CHECK
 if(orderTime < now){
     errorBox.innerText = "Select a future time";
 
     btn.innerText = "Place Order";
     btn.disabled = false;
-
     return;
 }
-// 🚫 BLOCK AFTER CLOSING TIME (21:00)
-let closingTime = new Date(date + "T21:00");
 
+// ✅ ALWAYS use orderTime date (not selected date)
+let checkDate = orderTime.toISOString().split("T")[0];
+
+let closingTime = new Date(checkDate + "T21:00");
+let openingTime = new Date(checkDate + "T09:00");
+
+// 🚫 BLOCK AFTER CLOSING TIME
 if(orderTime > closingTime){
     errorBox.innerText = "We close at 21:00";
 
@@ -903,9 +931,8 @@ if(orderTime > closingTime){
     btn.disabled = false;
     return;
 }
-    // 🚫 BLOCK BEFORE OPENING TIME (09:00)
-let openingTime = new Date(date + "T09:00");
 
+// 🚫 BLOCK BEFORE OPENING TIME
 if(orderTime < openingTime){
     errorBox.innerText = "We open at 09:00";
 
@@ -914,13 +941,12 @@ if(orderTime < openingTime){
     return;
 }
 
+// 🚫 MINIMUM NOTICE (2.5h)
 if(orderTime < new Date(now.getTime() + 150 * 60000)){
-    
     errorBox.innerText = "Minimum 2.5 hours notice required";
 
     btn.innerText = "Place Order";
     btn.disabled = false;
-
     return;
 }
 

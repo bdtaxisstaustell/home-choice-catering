@@ -900,6 +900,16 @@ if(orderTime > closingTime){
     btn.disabled = false;
     return;
 }
+// 🚫 BLOCK BEFORE OPENING TIME (09:00)
+let openingTime = new Date(date + "T09:00");
+
+if(orderTime < openingTime){
+    errorBox.innerText = "We open at 09:00";
+
+    btn.innerText = "Place Order";
+    btn.disabled = false;
+    return;
+}
 
 let diff = (orderTime - now) / (1000 * 60 * 60);
 
@@ -1097,11 +1107,11 @@ function updateTimeSlots(){
     let minTime = String(hours).padStart(2, '0') + ":" + String(minutes).padStart(2, '0');
     let maxTime = "21:00";
 
-    // ✅ convert to minutes for safe comparison
+    // convert to minutes
     let minTotal = hours * 60 + minutes;
-    let maxTotal = 21 * 60; // 21:00
+    let maxTotal = 21 * 60;
 
-    // 🔴 FIXED: numeric comparison
+    // 🔴 if too late today → move to tomorrow
     if(selectedDate === today && minTotal > maxTotal){
 
         let tomorrow = new Date();
@@ -1119,13 +1129,13 @@ function updateTimeSlots(){
         timeInput.min = minTime;
         timeInput.max = maxTime;
 
-       // convert input time to minutes
-let [inputH, inputM] = (timeInput.value || "00:00").split(":").map(Number);
-let inputTotal = inputH * 60 + inputM;
+        // convert input time safely
+        let [inputH, inputM] = (timeInput.value || "00:00").split(":").map(Number);
+        let inputTotal = inputH * 60 + inputM;
 
-if(!timeInput.value || inputTotal < minTotal){
-    timeInput.value = minTime;
-}
+        if(!timeInput.value || inputTotal < minTotal){
+            timeInput.value = minTime;
+        }
 
         document.getElementById("deliveryHint").innerText =
             "Earliest delivery today: " + minTime + " (before 21:00)";
@@ -1139,8 +1149,8 @@ if(!timeInput.value || inputTotal < minTotal){
             timeInput.value = "09:00";
         }
 
-       document.getElementById("deliveryHint").innerText =
-    "Next available delivery: tomorrow from 09:00";
+        document.getElementById("deliveryHint").innerText =
+            "Delivery hours: 09:00 – 21:00";
     }
 }
 
@@ -1151,6 +1161,8 @@ window.addEventListener("load", () => {
     document.getElementById("date").value = today;
     document.getElementById("date").setAttribute("min", today);
     updateTimeSlots();
+    document.getElementById("time").addEventListener("focus", updateTimeSlots);
+    document.getElementById("date").addEventListener("change", updateTimeSlots);
 
     const overlay = document.getElementById("overlay");
     overlay.addEventListener("click", () => {

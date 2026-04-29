@@ -620,17 +620,8 @@ input, select {
 <button onclick="changeQty('paratha',1)">+</button>
 </div>
 </div>
+<button class="btn" onclick="openForm()">Confirm Order</button>
 
-<button class="btn" onclick="goToCheckout()">Confirm Order</button>
-
-<div class="box" id="summaryBox">
-<h3>🧾 Order Summary</h3>
-
-<div id="summaryText" class="summary-list"></div>
-
-<div class="summary-total">
-Subtotal: £<span id="summaryTotal">0</span>
-</div>
 
 <div class="summary-actions">
 <button class="btn" onclick="showForm()">Continue to Delivery</button>
@@ -762,30 +753,6 @@ overlay.classList.remove("show");
 }
 }
 
-function showSummary(){
-let total = currentTotal;
-
-if(total<20){ alert("Minimum £20"); return; }
-
-let text="";
-for(let i in itemNames){
-    let qty = parseInt(document.getElementById(i).innerText);
-    if(qty > 0){
-        text += itemNames[i] + " x" + qty + "<br>";
-    }
-}
-
-document.getElementById("summaryText").innerHTML=text;
-document.getElementById("summaryTotal").innerText = total.toFixed(2);
-document.getElementById("summaryBox").style.display="block";
-
-setTimeout(() => {
-    document.getElementById("summaryBox").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-}, 200);
-}
 
 function showForm(){
     document.getElementById("formBox").style.display="block";
@@ -872,13 +839,28 @@ function removeItem(id){
     document.getElementById(id).innerText = 0;
     updateTotal();
 }
-function goToCheckout(){
+function openForm(){
     let total = currentTotal;
 
     if(total < 20){
         alert("Minimum £20 order required");
         return;
     }
+
+    const cart = document.querySelector(".cart-side");
+    const overlay = document.getElementById("overlay");
+
+    cart.classList.remove("cart-open");
+    overlay.classList.remove("show");
+
+    document.getElementById("formBox").style.display = "block";
+
+    setTimeout(() => {
+        document.getElementById("formBox").scrollIntoView({
+            behavior: "smooth"
+        });
+    }, 200);
+}
 
     // close mobile cart first
    const cart = document.querySelector(".cart-side");
@@ -897,10 +879,6 @@ overlay.classList.remove("show");
             behavior: "smooth"
         });
     }, 300);
-}
-
-function hideSummary(){
-    document.getElementById("summaryBox").style.display="none";
 }
 
 function toggleCart(){
@@ -1012,7 +990,7 @@ Total: £<span id="totalSide">0</span>
 
 <div class="cart-actions">
 <button class="btn btn-secondary" onclick="clearCart()">Clear</button>
-<button class="btn" onclick="goToCheckout()">Checkout</button>
+<button class="btn" onclick="openForm()">Checkout</button>
 </div>
 
 </div>

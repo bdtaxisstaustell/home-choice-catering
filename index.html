@@ -709,7 +709,7 @@ input, select {
 <div class="form-group">
 <label>Delivery Time *</label>
 
-<input type="time" id="time" onchange="updateTimeSlots()">
+<select id="time"></select>
 <div id="deliveryHint" style="font-size:13px;color:#64748b;"></div>
 
 </div>
@@ -911,9 +911,8 @@ if(orderTime < openingTime){
     return;
 }
 
-let diff = (orderTime - now) / (1000 * 60 * 60);
-
-if(diff < 2.5){
+if(orderTime < new Date(now.getTime() + 150 * 60000)){
+    
     errorBox.innerText = "Minimum 2.5 hours notice required";
 
     btn.innerText = "Place Order";
@@ -1092,9 +1091,9 @@ else if(diff > 60){
 
 function updateTimeSlots(){
 
-    let dateInput = document.getElementById("date");
-    let timeInput = document.getElementById("time");
-    let hint = document.getElementById("deliveryHint");
+    const dateInput = document.getElementById("date");
+    const timeSelect = document.getElementById("time");
+    const hint = document.getElementById("deliveryHint");
 
     let selectedDate = dateInput.value;
     let today = new Date().toISOString().split("T")[0];
@@ -1102,71 +1101,73 @@ function updateTimeSlots(){
     let now = new Date();
     now.setMinutes(now.getMinutes() + 150); // 2.5 hours notice
 
-    let hours = now.getHours();
-    let minutes = now.getMinutes();
+    let startHour = 9;
+    let endHour = 21;
 
-    let minTime = String(hours).padStart(2, '0') + ":" + String(minutes).padStart(2, '0');
-    let maxTime = "21:00";
+    let slots = [];
 
-    // Convert to minutes
-    let minTotal = hours * 60 + minutes;
-    let maxTotal = 21 * 60;
-
-    // 🚫 If too late today → move to tomorrow
-    if(selectedDate === today && minTotal > maxTotal){
+    // 🚫 If today but too late → move to tomorrow
+    if(selectedDate === today && now.getHours() >= endHour){
         let tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
-
-        let tomorrowStr = tomorrow.toISOString().split("T")[0];
-        dateInput.value = tomorrowStr;
-
+        dateInput.value = tomorrow.toISOString().split("T")[0];
         updateTimeSlots();
         return;
     }
 
-    // ✅ TODAY LOGIC
+    // 🔥 BUILD TIME SLOTS (every 15 mins)
+    let current = new Date();
+
     if(selectedDate === today){
-
-        timeInput.min = minTime;
-        timeInput.max = maxTime;
-
-        let [inputH, inputM] = (timeInput.value || "00:00").split(":").map(Number);
-        let inputTotal = inputH * 60 + inputM;
-
-        if(!timeInput.value || inputTotal < minTotal){
-            timeInput.value = minTime;
-        }
-
-        hint.innerText = "Earliest delivery today: " + minTime + " (before 21:00)";
-
-    } 
-    // ✅ FUTURE DATE LOGIC
-    else {
-
-        timeInput.min = "09:00";
-        timeInput.max = maxTime;
-
-        let [inputH, inputM] = (timeInput.value || "00:00").split(":").map(Number);
-        let inputTotal = inputH * 60 + inputM;
-
-        // ensure time stays within allowed range
-        if(!timeInput.value || inputTotal < 9*60){
-            timeInput.value = "09:00";
-        }
-
+        current = new Date(now);
+        hint.innerText = "Earliest delivery today (2.5h notice applied)";
+    } else {
+        current.setHours(startHour, 0, 0, 0);
         hint.innerText = "Delivery hours: 09:00 – 21:00";
     }
+
+    let end = new Date();
+    end.setHours(endHour, 0, 0, 0);
+
+    slots = [];
+
+    while(current <= end){
+        let h = String(current.getHours()).padStart(2, '0');
+        let m = String(current.getMinutes()).padStart(2, '0');
+
+        slots.push(`${h}:${m}`);
+
+        current.setMinutes(current.getMinutes() + 15);
+    }
+
+    // 🔁 UPDATE DROPDOWN
+    timeSelect.innerHTML = "";
+
+    if(slots.length === 0){
+        timeSelect.innerHTML = `<option>No slots available</option>`;
+        return;
+    }
+
+    slots.forEach(t => {
+        let opt = document.createElement("option");
+        opt.value = t;
+        opt.textContent = t;
+        timeSelect.appendChild(opt);
+    });
 }
 
 window.addEventListener("load", () => {
     loadCart();
 
+    const dateEl = document.getElementById("date");
+
     let today = new Date().toISOString().split("T")[0];
-    document.getElementById("date").value = today;
-    document.getElementById("date").setAttribute("min", today);
+    dateEl.value = today;
+    dateEl.setAttribute("min", today);
+
     updateTimeSlots();
-    document.getElementById("time").addEventListener("focus", updateTimeSlots);
-    document.getElementById("date").addEventListener("change", updateTimeSlots);
+
+    dateEl.addEventListener("change", updateTimeSlots);
 
     const overlay = document.getElementById("overlay");
     overlay.addEventListener("click", () => {
@@ -1174,8 +1175,7 @@ window.addEventListener("load", () => {
         cart.classList.remove("cart-open");
         overlay.classList.remove("show");
     });
-}); 
-
+});
 
 </script>
 <div id="overlay"></div>

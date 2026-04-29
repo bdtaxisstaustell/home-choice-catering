@@ -1094,12 +1094,13 @@ function updateTimeSlots(){
 
     let dateInput = document.getElementById("date");
     let timeInput = document.getElementById("time");
+    let hint = document.getElementById("deliveryHint");
 
     let selectedDate = dateInput.value;
     let today = new Date().toISOString().split("T")[0];
 
     let now = new Date();
-    now.setMinutes(now.getMinutes() + 150); // 2.5 hours
+    now.setMinutes(now.getMinutes() + 150); // 2.5 hours notice
 
     let hours = now.getHours();
     let minutes = now.getMinutes();
@@ -1107,13 +1108,12 @@ function updateTimeSlots(){
     let minTime = String(hours).padStart(2, '0') + ":" + String(minutes).padStart(2, '0');
     let maxTime = "21:00";
 
-    // ✅ convert to minutes for safe comparison
+    // Convert to minutes
     let minTotal = hours * 60 + minutes;
-    let maxTotal = 21 * 60; // 21:00
+    let maxTotal = 21 * 60;
 
-    // 🔴 FIXED: numeric comparison
+    // 🚫 If too late today → move to tomorrow
     if(selectedDate === today && minTotal > maxTotal){
-
         let tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
 
@@ -1124,33 +1124,37 @@ function updateTimeSlots(){
         return;
     }
 
+    // ✅ TODAY LOGIC
     if(selectedDate === today){
 
         timeInput.min = minTime;
         timeInput.max = maxTime;
 
-       // convert input time to minutes
-let [inputH, inputM] = (timeInput.value || "00:00").split(":").map(Number);
-let inputTotal = inputH * 60 + inputM;
+        let [inputH, inputM] = (timeInput.value || "00:00").split(":").map(Number);
+        let inputTotal = inputH * 60 + inputM;
 
-if(!timeInput.value || inputTotal < minTotal){
-    timeInput.value = minTime;
-}
+        if(!timeInput.value || inputTotal < minTotal){
+            timeInput.value = minTime;
+        }
 
-        document.getElementById("deliveryHint").innerText =
-            "Earliest delivery today: " + minTime + " (before 21:00)";
+        hint.innerText = "Earliest delivery today: " + minTime + " (before 21:00)";
 
-    } else {
+    } 
+    // ✅ FUTURE DATE LOGIC
+    else {
 
         timeInput.min = "09:00";
         timeInput.max = maxTime;
 
-        if(!timeInput.value){
+        let [inputH, inputM] = (timeInput.value || "00:00").split(":").map(Number);
+        let inputTotal = inputH * 60 + inputM;
+
+        // ensure time stays within allowed range
+        if(!timeInput.value || inputTotal < 9*60){
             timeInput.value = "09:00";
         }
 
-       document.getElementById("deliveryHint").innerText =
-    "Next available delivery: tomorrow from 09:00";
+        hint.innerText = "Delivery hours: 09:00 – 21:00";
     }
 }
 

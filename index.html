@@ -709,14 +709,8 @@ input, select {
 <div class="form-group">
 <label>Delivery Time *</label>
 
-<select id="time">
-<option value="">Select time</option>
-<option>12:00</option>
-<option>14:00</option>
-<option>16:00</option>
-<option>18:00</option>
-<option>20:00</option>
-</select>
+<input type="time" id="time">
+<div id="deliveryHint" style="font-size:13px;color:#64748b;"></div>
 
 <div id="deliveryHint" style="font-size:13px;color:#64748b;"></div>
 
@@ -1115,7 +1109,7 @@ if(selectedDate === today){
         }
     }
 
-    // 🔥 KEY FIX
+
     if(!hasValid){
         let tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
@@ -1123,8 +1117,6 @@ if(selectedDate === today){
         let tomorrowStr = tomorrow.toISOString().split("T")[0];
 
         document.getElementById("date").value = tomorrowStr;
-
-        updateTimeSlots();
         return;
     }
 }
@@ -1141,21 +1133,33 @@ if(selectedDate === today){
 
 window.addEventListener("load", () => {
     loadCart();
-let today = new Date().toISOString().split("T")[0];
-document.getElementById("date").value = today;
-document.getElementById("date").setAttribute("min", today);
 
-updateTimeSlots();
+    let today = new Date().toISOString().split("T")[0];
+    document.getElementById("date").value = today;
+    document.getElementById("date").setAttribute("min", today);
 
-document.getElementById("date").addEventListener("change", updateTimeSlots);
+    let now = new Date();
+    now.setMinutes(now.getMinutes() + 150); // 2.5 hours
+
+    let hours = String(now.getHours()).padStart(2, '0');
+    let minutes = String(now.getMinutes()).padStart(2, '0');
+
+    let minTime = `${hours}:${minutes}`;
+
+    let timeInput = document.getElementById("time");
+    timeInput.min = minTime;
+    timeInput.value = minTime;
+
+    document.getElementById("deliveryHint").innerText =
+        "Earliest delivery time: " + minTime;
+
     const overlay = document.getElementById("overlay");
     overlay.addEventListener("click", () => {
-    const cart = document.querySelector(".cart-side");
-
+        const cart = document.querySelector(".cart-side");
         cart.classList.remove("cart-open");
         overlay.classList.remove("show");
     });
-});   
+}); 
 
 
 </script>

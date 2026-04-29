@@ -1119,9 +1119,13 @@ function updateTimeSlots(){
         timeInput.min = minTime;
         timeInput.max = maxTime;
 
-        if(!timeInput.value || timeInput.value < minTime){
-            timeInput.value = minTime;
-        }
+       // convert input time to minutes
+let [inputH, inputM] = (timeInput.value || "00:00").split(":").map(Number);
+let inputTotal = inputH * 60 + inputM;
+
+if(!timeInput.value || inputTotal < minTotal){
+    timeInput.value = minTime;
+}
 
         document.getElementById("deliveryHint").innerText =
             "Earliest delivery today: " + minTime + " (before 21:00)";
@@ -1135,8 +1139,8 @@ function updateTimeSlots(){
             timeInput.value = "09:00";
         }
 
-        document.getElementById("deliveryHint").innerText =
-            "Delivery hours: 09:00 – 21:00";
+       document.getElementById("deliveryHint").innerText =
+    "Next available delivery: tomorrow from 09:00";
     }
 }
 

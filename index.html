@@ -78,6 +78,7 @@ header h1 {
     max-width: 900px;
     margin: auto;
     padding: 20px;
+    margin-right: 280px;
 }
 
 /* SECTION */
@@ -406,10 +407,7 @@ input, select {
 
 <div class="section-title">Main Dishes</div>
 
-<div class="card">
-  <div class="card-top">
-    <span>Akhni Chicken</span>
-    <span>£10</span>
+<div class="card" id="card-akhniChicken">
   </div>
   <div class="desc">
     Aromatic chicken and rice cooked together with traditional spices
@@ -421,10 +419,7 @@ input, select {
   </div>
 </div>
 
-<div class="card">
-  <div class="card-top">
-    <span>Lamb Tehari</span>
-    <span>£11</span>
+<div class="card" id="card-tehari">
   </div>
   <div class="desc">
     Spiced rice with tender lamb, rich and comforting
@@ -436,10 +431,7 @@ input, select {
   </div>
 </div>
 
-<div class="card">
-  <div class="card-top">
-    <span>Murogh Roast (Drumstick)</span>
-    <span>£11</span>
+<div class="card" id="card-roast">
   </div>
   <div class="desc">
     Marinated chicken drumstick roasted in homestyle spices
@@ -451,10 +443,7 @@ input, select {
   </div>
 </div>
 
-<div class="card">
-  <div class="card-top">
-    <span>Lamb Rezala</span>
-    <span>£11</span>
+<div class="card" id="card-rezala">
   </div>
   <div class="desc">
     Mild, creamy lamb curry with yoghurt and delicate spices
@@ -466,10 +455,7 @@ input, select {
   </div>
 </div>
 
-<div class="card">
-  <div class="card-top">
-    <span>Aloo Bhuna (Lamb/Chicken)</span>
-    <span>£11</span>
+<div class="card" id="card-bhuna">
   </div>
   <div class="desc">
     Slow-cooked meat and potatoes in a rich, thick spiced gravy
@@ -480,11 +466,7 @@ input, select {
     <button onclick="changeQty('bhuna',1)">+</button>
   </div>
 </div>
-
-<div class="card">
-  <div class="card-top">
-    <span>Fish Jhol</span>
-    <span>£9</span>
+<div class="card" id="card-fish">
   </div>
   <div class="desc">
     Light fish curry in a flavourful, spiced broth
@@ -496,10 +478,7 @@ input, select {
   </div>
 </div>
 
-<div class="card">
-  <div class="card-top">
-    <span>Dim Bhuna (Egg)</span>
-    <span>£9</span>
+<div class="card" id="card-egg">
   </div>
   <div class="desc">
     Boiled eggs cooked in a thick, spiced onion gravy
@@ -513,7 +492,7 @@ input, select {
 
 <div class="section-title">Sides & Vegetarian</div>
 
-<div class="card">
+<div class="card" id="card-alooSide">
 <div class="card-top"><span>Aloo Bhajee</span><span>£4</span></div>
 <div class="desc">Stir-fried potatoes with mild spices</div>
 <div class="qty">
@@ -523,7 +502,7 @@ input, select {
 </div>
 </div>
 
-<div class="card">
+<div class="card" id="card-sobji">
 <div class="card-top"><span>Sobji Bhuna</span><span>£7.50</span></div>
 <div class="desc">Mixed vegetables cooked in a rich, spiced sauce</div>
 <div class="qty">
@@ -533,7 +512,7 @@ input, select {
 </div>
 </div>
 
-<div class="card">
+<div class="card" id="card-begun">
 <div class="card-top"><span>Begun Bhaje</span><span>£4</span></div>
 <div class="desc">Lightly spiced fried aubergine slices</div>
 <div class="qty">
@@ -545,7 +524,7 @@ input, select {
 
 <div class="section-title">Desserts (Pre-order)</div>
 
-<div class="card">
+<div class="card" id="card-pudding">
 <div class="card-top"><span>Egg Pudding</span><span>£5</span></div>
 <div class="desc">Smooth and creamy caramel egg dessert</div>
 <div class="qty">
@@ -555,7 +534,7 @@ input, select {
 </div>
 </div>
 
-<div class="card">
+<div class="card" id="card-gulab">
 <div class="card-top"><span>Gulab Jamun</span><span>£10</span></div>
 <div class="desc">Soft milk dumplings soaked in sweet syrup</div>
 <div class="qty">
@@ -565,7 +544,7 @@ input, select {
 </div>
 </div>
 
-<div class="card">
+<div class="card" id="card-rasmalai">
 <div class="card-top"><span>Rasmalai</span><span>£10</span></div>
 <div class="desc">Soft cheese balls in sweet, creamy milk</div>
 <div class="qty">
@@ -575,7 +554,7 @@ input, select {
 </div>
 </div>
 
-<div class="card">
+<div class="card" id="card-cake">
 <div class="card-top"><span>Birthday Cake</span><span>£25</span></div>
 <div class="desc">Freshly made cake for special occasions</div>
 <div class="qty">
@@ -587,7 +566,7 @@ input, select {
 
 <div class="section-title">Snacks</div>
 
-<div class="card">
+<div class="card" id="card-samosa">
 <div class="card-top"><span>Chicken Samosa</span><span>£3</span></div>
 <div class="desc">Crispy pastry filled with spiced chicken</div>
 <div class="qty">
@@ -607,7 +586,7 @@ input, select {
 </div>
 </div>
 
-<div class="card">
+<div class="card" id="card-spring">
 <div class="card-top"><span>Spring Roll</span><span>£3</span></div>
 <div class="desc">Crunchy rolls filled with vegetables or chicken</div>
 <div class="qty">
@@ -617,7 +596,7 @@ input, select {
 </div>
 </div>
 
-<div class="card">
+<div class="card" id="card-pastry">
 <div class="card-top"><span>Murogh Pastry</span><span>£3</span></div>
 <div class="desc">Flaky pastry stuffed with spiced chicken</div>
 <div class="qty">
@@ -627,7 +606,7 @@ input, select {
 </div>
 </div>
 
-<div class="card">
+<div class="card" id="card-paratha">
 <div class="card-top"><span>Paratha</span><span>£1.50</span></div>
 <div class="desc">Soft, layered flatbread with a light crisp</div>
 <div class="qty">
@@ -636,6 +615,7 @@ input, select {
 <button onclick="changeQty('paratha',1)">+</button>
 </div>
 </div>
+ 
 <button class="btn" onclick="openForm()">Confirm & Enter Delivery</button>
 
 </div>

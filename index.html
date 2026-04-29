@@ -722,7 +722,14 @@ input, select {
 </div>
 
 <script>
+function getLocalDate(){
+    let now = new Date();
+    let year = now.getFullYear();
+    let month = String(now.getMonth() + 1).padStart(2, '0');
+    let day = String(now.getDate()).padStart(2, '0');
 
+    return `${year}-${month}-${day}`;
+}
 let prices = {
 breakfast:9.95,
 rice1:3.5, rice2:3.95,
@@ -1125,7 +1132,7 @@ function updateTimeSlots(){
     const hint = document.getElementById("deliveryHint");
 
     let selectedDate = dateInput.value;
-    let today = new Date().toISOString().split("T")[0];
+    let today = getLocalDate();
 
     let now = new Date();
     now.setMinutes(now.getMinutes() + 150); // 2.5 hours notice
@@ -1139,7 +1146,7 @@ function updateTimeSlots(){
     if(selectedDate === today && now.getHours() >= endHour){
         let tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
-        dateInput.value = tomorrow.toISOString().split("T")[0];
+        let t = new Date(); t.setDate(t.getDate() + 1);  let tomorrowStr =     t.getFullYear() + "-" +     String(t.getMonth()+1).padStart(2,'0') + "-" +     String(t.getDate()).padStart(2,'0');  dateInput.value = tomorrowStr;
         updateTimeSlots();
         return;
     }
@@ -1215,7 +1222,7 @@ window.addEventListener("load", () => {
 
     const dateEl = document.getElementById("date");
 
-    let today = new Date().toISOString().split("T")[0];
+    let today = getLocalDate();
     dateEl.value = today;
     dateEl.setAttribute("min", today);
 

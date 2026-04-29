@@ -703,15 +703,13 @@ input, select {
 
 <div class="form-group">
 <label>Delivery Date *</label>
-<input type="date" id="date">
+<input type="date" id="date" onchange="updateTimeSlots()">
 </div>
 
 <div class="form-group">
 <label>Delivery Time *</label>
 
-<input type="time" id="time">
-<div id="deliveryHint" style="font-size:13px;color:#64748b;"></div>
-
+<input type="time" id="time" onchange="updateTimeSlots()">
 <div id="deliveryHint" style="font-size:13px;color:#64748b;"></div>
 
 </div>
@@ -747,7 +745,7 @@ samosa:"Samosa", peyaju:"Peyaju", spring:"Spring Roll", pastry:"Pastry", paratha
 function saveCart(){
     let data = {};
     for(let i in prices){
-        data[i] = document.getElementById(i).innerText;
+        data[i] = parseInt(document.getElementById(i).innerText);
     }
     localStorage.setItem("cart", JSON.stringify(data));
 }
@@ -1137,6 +1135,7 @@ window.addEventListener("load", () => {
     let today = new Date().toISOString().split("T")[0];
     document.getElementById("date").value = today;
     document.getElementById("date").setAttribute("min", today);
+    updateTimeSlots();
 
     let now = new Date();
     now.setMinutes(now.getMinutes() + 150); // 2.5 hours

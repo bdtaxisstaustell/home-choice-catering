@@ -855,6 +855,9 @@ let address = document.getElementById("address").value.trim();
 let miles = parseFloat(document.getElementById("miles").value || 0);
 let date = document.getElementById("date").value;
 let time = document.getElementById("time").value;
+if(time.includes("ASAP")){
+    time = "ASAP (auto scheduled)";
+}
 
 let errorBox = document.getElementById("formError");
 errorBox.innerText = "";
@@ -1131,7 +1134,7 @@ function updateTimeSlots(){
 
     slots = [];
 
-    while(current <= end){
+    while(current < end){
         let h = String(current.getHours()).padStart(2, '0');
         let m = String(current.getMinutes()).padStart(2, '0');
 
@@ -1139,6 +1142,7 @@ function updateTimeSlots(){
 
         current.setMinutes(current.getMinutes() + 15);
     }
+    slots.unshift("ASAP (earliest available)");
 
     // 🔁 UPDATE DROPDOWN
     timeSelect.innerHTML = "";

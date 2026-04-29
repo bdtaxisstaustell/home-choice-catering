@@ -1129,13 +1129,15 @@ if(selectedDate === today){
     }
 }
  
-    if(selected){
-        timeSelect.value = selected;
-    }
-    document.getElementById("deliveryHint").innerText =
-    "Earliest delivery slot selected automatically";
-}
+   if(selected){
+    timeSelect.value = selected;
 
+    let label = selectedDate === today ? "Today" : "Selected date";
+
+    document.getElementById("deliveryHint").innerText =
+        `Next available delivery: ${label} at ${selected}`;
+}
+}
 
 window.addEventListener("load", () => {
     loadCart();

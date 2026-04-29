@@ -620,13 +620,8 @@ input, select {
 <button onclick="changeQty('paratha',1)">+</button>
 </div>
 </div>
-<button class="btn" onclick="openForm()">Confirm Order</button>
+<button class="btn" onclick="openForm()">Confirm & Enter Delivery</button>
 
-
-<div class="summary-actions">
-<button class="btn" onclick="showForm()">Continue to Delivery</button>
-<button class="btn btn-secondary" onclick="hideSummary()">Back</button>
-</div>
 </div>
 
     <div class="box" id="formBox">
@@ -862,24 +857,6 @@ function openForm(){
     }, 200);
 }
 
-    // close mobile cart first
-   const cart = document.querySelector(".cart-side");
-const overlay = document.getElementById("overlay");
-
-cart.classList.remove("cart-open");
-overlay.classList.remove("show");
-
-    // show summary
-    document.getElementById("summaryBox").style.display = "block";
-
-    // scroll to summary
-    setTimeout(() => {
-        window.scrollTo({
-            top: document.getElementById("summaryBox").offsetTop - 20,
-            behavior: "smooth"
-        });
-    }, 300);
-}
 
 function toggleCart(){
     const cart = document.querySelector(".cart-side");
@@ -990,7 +967,7 @@ Total: £<span id="totalSide">0</span>
 
 <div class="cart-actions">
 <button class="btn btn-secondary" onclick="clearCart()">Clear</button>
-<button class="btn" onclick="openForm()">Checkout</button>
+<button class="btn" onclick="openForm()">Enter Delivery</button>
 </div>
 
 </div>

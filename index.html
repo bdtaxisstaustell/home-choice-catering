@@ -11,6 +11,8 @@ body {
     margin: 0;
     font-family: 'Segoe UI', Arial;
     background: linear-gradient(to bottom, #0f172a, #1e293b);
+
+    display: flex;
 }
 
 /* HEADER */
@@ -74,11 +76,12 @@ header h1 {
 }
 
 /* CONTAINER */
+
 .container {
+    flex: 1;
     max-width: 900px;
     margin: auto;
     padding: 20px;
-    margin-right: 280px;
 }
 
 /* SECTION */
@@ -94,6 +97,12 @@ header h1 {
     padding: 16px;
     border-radius: 12px;
     margin-bottom: 15px;
+    transition: transform 0.15s ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
 }
 .card.flash {
     animation: flash 0.4s ease;
@@ -198,7 +207,7 @@ input, select {
     position: fixed;
     right: 0;
     top: 0;
-    width: 260px;
+    width: 280px;
     height: 100%;
     background: #020617;
     color: white;

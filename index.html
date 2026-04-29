@@ -1069,6 +1069,7 @@ else if(diff > 60){
         cart.style.transform = "";
     });
     }); 
+
 function updateTimeSlots(){
 
     let dateInput = document.getElementById("date");
@@ -1083,32 +1084,48 @@ function updateTimeSlots(){
     let hours = String(now.getHours()).padStart(2, '0');
     let minutes = String(now.getMinutes()).padStart(2, '0');
 
- let minTime = `${hours}:${minutes}`;
-let maxTime = "21:00"; // closing time
+    let minTime = `${hours}:${minutes}`;
+    let maxTime = "21:00"; // closing time
 
-if(selectedDate === today){
+    // 🔴 NEW: if too late today → move to tomorrow
+    if(selectedDate === today && minTime > maxTime){
 
-    timeInput.min = minTime;
-    timeInput.max = maxTime; // ✅ ADD THIS
+        let tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
 
-    if(!timeInput.value || timeInput.value < minTime){
-        timeInput.value = minTime;
+        let tomorrowStr = tomorrow.toISOString().split("T")[0];
+
+        dateInput.value = tomorrowStr;
+
+        // re-run function for tomorrow
+        updateTimeSlots();
+        return;
     }
 
-    document.getElementById("deliveryHint").innerText =
-        "Earliest delivery today: " + minTime + " (before 21:00)";
+    if(selectedDate === today){
 
-} else {
+        timeInput.min = minTime;
+        timeInput.max = maxTime;
 
-    timeInput.min = "09:00";
-    timeInput.max = maxTime; // ✅ ADD THIS
+        if(!timeInput.value || timeInput.value < minTime){
+            timeInput.value = minTime;
+        }
 
-    if(!timeInput.value){
-        timeInput.value = "09:00";
+        document.getElementById("deliveryHint").innerText =
+            "Earliest delivery today: " + minTime + " (before 21:00)";
+
+    } else {
+
+        timeInput.min = "09:00";
+        timeInput.max = maxTime;
+
+        if(!timeInput.value){
+            timeInput.value = "09:00";
+        }
+
+        document.getElementById("deliveryHint").innerText =
+            "Delivery hours: 09:00 – 21:00";
     }
-
-    document.getElementById("deliveryHint").innerText =
-        "Delivery hours: 09:00 – 21:00";
 }
 
 window.addEventListener("load", () => {

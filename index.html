@@ -845,8 +845,12 @@ overlay.classList.remove("show");
 
 
 
-    function checkout(){
+function checkout(){
 
+
+let btn = document.getElementById("orderBtn");
+    btn.innerText = "Processing...";
+    btn.disabled = true;
 let name = document.getElementById("name").value.trim();
 let phone = document.getElementById("phone").value.trim();
 let address = document.getElementById("address").value.trim();
@@ -860,12 +864,20 @@ errorBox.innerText = "";
 // VALIDATION
 if(!name || !phone || !address || !date || !time){
     errorBox.innerText = "Please fill all required fields (*)";
+
+    btn.innerText = "Place Order";
+    btn.disabled = false;
+
     return;
 }
 
 let phoneRegex = /^07\d{9}$/;
 if(!phoneRegex.test(phone)){
     errorBox.innerText = "Enter a valid UK phone number";
+
+    btn.innerText = "Place Order";
+    btn.disabled = false;
+
     return;
 }
 // TIME CHECK
@@ -875,6 +887,10 @@ let orderTime = new Date(date + "T" + time);
 // ❗ NEW FIX (add this block here)
 if(orderTime < now){
     errorBox.innerText = "Select a future time";
+
+    btn.innerText = "Place Order";
+    btn.disabled = false;
+
     return;
 }
 
@@ -882,6 +898,10 @@ let diff = (orderTime - now) / (1000 * 60 * 60);
 
 if(diff < 3){
     errorBox.innerText = "Minimum 3 hours notice required";
+
+    btn.innerText = "Place Order";
+    btn.disabled = false;
+
     return;
 }
 
@@ -926,6 +946,7 @@ alert("Order opened in WhatsApp. Please press SEND to confirm your order.");
         document.getElementById(i).innerText = 0;
     }
     updateTotal();
+    saveCart();
 }
 function repeatOrder(){
     let last = localStorage.getItem("lastOrder");
@@ -945,6 +966,7 @@ function repeatOrder(){
 function removeItem(id){
     document.getElementById(id).innerText = 0;
     updateTotal();
+    saveCart();
 }
 function openForm(){
     let total = currentTotal;

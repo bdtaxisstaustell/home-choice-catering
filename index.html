@@ -410,9 +410,9 @@ input, select {
 <div class="card-top"><span>Morning Breakfast</span><span>£9.95</span></div>
 <div class="desc">Hearty breakfast with egg, hash brown, toasted bread, sausage, mushrooms, and grilled tomatoes</div>
 <div class="qty">
-<button onclick="changeQty('breakfast',-1)">-</button>
+<button aria-label="Decrease Morning Breakfast quantity" onclick="changeQty('breakfast',-1)">-</button>
 <span id="breakfast">0</span>
-<button onclick="changeQty('breakfast',1)">+</button>
+<button aria-label="Increase Morning Breakfast quantity" onclick="changeQty('breakfast',1)">+</button>
 </div>
 </div>
 
@@ -718,7 +718,7 @@ input, select {
 
 <div id="formError" class="form-error"></div>
 
-<button class="btn" onclick="checkout()">Place Order</button>
+<button class="btn" id="orderBtn" onclick="checkout()">Place Order</button>
 </div>
 
 </div>
@@ -744,6 +744,26 @@ pudding:"Egg Pudding", gulab:"Gulab Jamun", rasmalai:"Rasmalai", cake:"Cake",
 samosa:"Samosa", peyaju:"Peyaju", spring:"Spring Roll", pastry:"Pastry", paratha:"Paratha"
 };
 
+function saveCart(){
+    let data = {};
+    for(let i in prices){
+        data[i] = document.getElementById(i).innerText;
+    }
+    localStorage.setItem("cart", JSON.stringify(data));
+}
+
+function loadCart(){
+    let data = JSON.parse(localStorage.getItem("cart"));
+    if(!data) return;
+
+    for(let i in data){
+        if(document.getElementById(i)){
+            document.getElementById(i).innerText = data[i];
+        }
+    }
+    updateTotal();
+}
+    
 function changeQty(id, change){
     let el = document.getElementById(id);
     let val = parseInt(el.innerText) + change;
@@ -771,7 +791,9 @@ if(change > 0){
     }
 
     updateTotal();
+    saveCart();
 }
+
 
 let currentTotal = 0;
 
@@ -891,7 +913,12 @@ msg += "\n🏠 Address: " + address;
 
 msg += "\n\n📅 *Delivery Time:* " + date + " " + time;
 
+if(!confirm("Confirm order and open WhatsApp?")){
+    return;
+}
+localStorage.setItem("lastOrder", msg);
 window.open("https://wa.me/441726983441?text=" + encodeURIComponent(msg));
+alert("Order opened in WhatsApp. Please press SEND to confirm your order.");
 }
 
     function clearCart(){
@@ -900,13 +927,31 @@ window.open("https://wa.me/441726983441?text=" + encodeURIComponent(msg));
     }
     updateTotal();
 }
+function repeatOrder(){
+    let last = localStorage.getItem("lastOrder");
+
+    if(!last){
+        alert("No previous order found");
+        return;
+    }
+
+    if(!confirm("Repeat your last order?")){
+        return;
+    }
+
+    window.open("https://wa.me/441726983441?text=" + encodeURIComponent(last));
+}
+
 function removeItem(id){
     document.getElementById(id).innerText = 0;
     updateTotal();
 }
 function openForm(){
     let total = currentTotal;
-
+     if(total === 0){
+        alert("Your cart is empty");
+        return;
+    }
     if(total < 20){
         alert("Minimum £20 order required");
         return;
@@ -1004,6 +1049,7 @@ else if(diff > 60){
 /* ✅ NOW truly outside */
 
 window.addEventListener("load", () => {
+    loadCart();
     const overlay = document.getElementById("overlay");
 
     overlay.addEventListener("click", () => {
@@ -1038,6 +1084,7 @@ Total: £<span id="totalSide">0</span>
 <div class="cart-actions">
 <button class="btn btn-secondary" onclick="clearCart()">Clear</button>
 <button class="btn" onclick="openForm()">Enter Delivery</button>
+<button class="btn btn-secondary" onclick="repeatOrder()">Repeat Last Order</button>
 </div>
 
 </div>

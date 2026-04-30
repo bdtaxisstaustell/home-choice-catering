@@ -1144,9 +1144,15 @@ function updateTimeSlots(){
 
     // 🚫 If today but too late → move to tomorrow
     if(selectedDate === today && now.getHours() >= endHour){
-        let tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        let t = new Date(); t.setDate(t.getDate() + 1);  let tomorrowStr =     t.getFullYear() + "-" +     String(t.getMonth()+1).padStart(2,'0') + "-" +     String(t.getDate()).padStart(2,'0');  dateInput.value = tomorrowStr;
+        let t = new Date();
+        t.setDate(t.getDate() + 1);
+
+        let tomorrowStr =
+            t.getFullYear() + "-" +
+            String(t.getMonth()+1).padStart(2,'0') + "-" +
+            String(t.getDate()).padStart(2,'0');
+
+        dateInput.value = tomorrowStr;
         updateTimeSlots();
         return;
     }
@@ -1155,27 +1161,23 @@ function updateTimeSlots(){
 
     if(selectedDate === today){
 
-        // 🔥 KEY LOGIC (THIS IS WHAT YOU WANTED)
         let opening = new Date();
         opening.setHours(9, 0, 0, 0);
 
-        // choose later of:
-        // - 09:00
-        // - now + 2.5h
         let baseTime = new Date(Math.max(opening.getTime(), now.getTime()));
 
-// ✅ ROUND UP to next 15 minutes
-let minutes = baseTime.getMinutes();
-let remainder = minutes % 15;
+        // ✅ ROUND UP to next 15 minutes
+        let minutes = baseTime.getMinutes();
+        let remainder = minutes % 15;
 
-if(remainder !== 0){
-    baseTime.setMinutes(minutes + (15 - remainder));
-}
+        if(remainder !== 0){
+            baseTime.setMinutes(minutes + (15 - remainder));
+        }
 
-baseTime.setSeconds(0);
-baseTime.setMilliseconds(0);
+        baseTime.setSeconds(0);
+        baseTime.setMilliseconds(0);
 
-current = baseTime;
+        current = baseTime;
 
         hint.innerText = "Earliest delivery today (after 09:00 + 2.5h notice)";
 
@@ -1194,14 +1196,10 @@ current = baseTime;
         let m = String(current.getMinutes()).padStart(2, '0');
 
         slots.push(`${h}:${m}`);
-
         current.setMinutes(current.getMinutes() + 15);
     }
 
-    // ✅ ASAP FIRST
-    slots.unshift(`ASAP (${slots[1]})`);
-
-    // 🔁 UPDATE DROPDOWN
+    // 🔒 SAFETY CHECK FIRST
     timeSelect.innerHTML = "";
 
     if(slots.length === 0){
@@ -1209,12 +1207,20 @@ current = baseTime;
         return;
     }
 
+    // ✅ ASAP FIRST
+    let asapTime = slots[0];
+    slots.unshift(`ASAP (${asapTime})`);
+
+    // 🔁 BUILD DROPDOWN
     slots.forEach(t => {
         let opt = document.createElement("option");
         opt.value = t;
         opt.textContent = t;
         timeSelect.appendChild(opt);
-    });
+        });
+
+    // ✅ DEFAULT = ASAP
+timeSelect.selectedIndex = 0;
 }
 
 window.addEventListener("load", () => {

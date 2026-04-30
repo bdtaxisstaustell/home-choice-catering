@@ -863,7 +863,7 @@ let miles = parseFloat(document.getElementById("miles").value || 0);
 let date = document.getElementById("date").value;
 let time = document.getElementById("time").value;
 // 🔥 HANDLE ASAP FIRST
-let isASAP = time.includes("ASAP");
+let isASAP = (time === "ASAP");
 
 let now = new Date();
 let orderTime;
@@ -885,14 +885,24 @@ if(isASAP){
     asap.setMilliseconds(0);
 
     orderTime = asap;
-
-    // convert for message
     time = orderTime.toTimeString().slice(0,5);
 
 } else {
     orderTime = new Date(date + "T" + time);
 }
+// 🔒 Prevent too many ASAP orders (basic local limit)
+let key = "slot_" + orderTime.toTimeString().slice(0,5);
+let count = parseInt(localStorage.getItem(key) || 0);
 
+if(count >= 5){
+    errorBox.innerText = "This time slot is full. Please choose another.";
+    btn.innerText = "Place Order";
+    btn.disabled = false;
+    return;
+}
+
+// save slot usage
+localStorage.setItem(key, count + 1);
 
 // 🔥 VALIDATION STARTS HERE
 let errorBox = document.getElementById("formError");
@@ -1214,7 +1224,7 @@ function updateTimeSlots(){
     // 🔁 BUILD DROPDOWN
     slots.forEach(t => {
         let opt = document.createElement("option");
-        opt.value = t;
+        opt.value = t.includes("ASAP") ? "ASAP" : t;
         opt.textContent = t;
         timeSelect.appendChild(opt);
         });
